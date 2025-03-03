@@ -1,5 +1,6 @@
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { DataSourceOptions } from "typeorm";
 
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
     imports: [ConfigModule],
@@ -14,9 +15,21 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
             username: configService.get<string>("DB_USER"),
             database: configService.get<string>("DB_NAME"),
             password: configService.get<string>("DB_PASSWORD"),
-            //   entities: ["dist/**/*.entity.js"],
             synchronize: true,
-            // migrations: ["dist/db/migrations/*.js"],
+            entities: ['dist/**/*.entity{.js,.ts}'],
+            migrations: ['dist/db/migrations/*{.js,.ts}'],
         };
     },
+};
+
+export const dataSourceOptions: DataSourceOptions = {
+    type: "postgres",
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT!),
+    username: process.env.USERNAME,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    synchronize: true,
+    entities: ['dist/**/*.entity{.js,.ts}'],
+    migrations: ['dist/db/migrations/*{.js,.ts}'],
 };
