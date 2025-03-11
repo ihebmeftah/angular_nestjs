@@ -30,7 +30,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.userService.remove(+id);
+  remove(@Param('id', ParseUUIDPipe) id: UUID) {
+    return this.userService.remove(id);
   }
 }

@@ -1,11 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import * as bcrypt from "bcryptjs";
 import { UUID } from 'crypto';
-
 @Injectable()
 export class UserService {
   constructor(
@@ -16,6 +16,8 @@ export class UserService {
     if (exist) {
       throw new HttpException('User already exist', HttpStatus.CONFLICT);
     }
+    const salt = await bcrypt.genSalt();
+    createUserDto.password = await bcrypt.hash(createUserDto.password, salt);
     return this.userRepo.save(createUserDto);
   }
 
@@ -38,7 +40,9 @@ export class UserService {
     return { before, after };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: UUID) {
+    const user = await this.findOne(id);
+    await this.userRepo.delete(id);
+    return `User ${user.email} deleted successfully`;
   }
 }
