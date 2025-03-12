@@ -1,0 +1,66 @@
+**ENDPOINTS**
+1. Authentification & Gestion des utilisateurs
+    POST /auth/register → Inscription d'un employé (Admin uniquement).
+    POST /auth/login → Connexion avec JWT.
+    GET /users → Liste des employés (RH/Admin).
+    GET /users/:id → Détails d'un employé.
+    PUT /users/:id → Modifier un employé (RH/Admin).
+    DELETE /users/:id → Supprimer un employé (Admin).
+
+2. Gestion des congés
+    POST /leaves → Demande de congé (Employé).
+    GET /leaves → Liste des congés (RH/Admin).
+    GET /leaves/:id → Détails d'une demande de congé.
+    PUT /leaves/:id/approve → Approuver un congé (RH).
+    PUT /leaves/:id/reject → Rejeter un congé (RH).
+    DELETE /leaves/:id → Supprimer une demande de congé (RH/Admin).
+
+3. Gestion des évaluations de performance
+    POST /evaluations → Ajouter une évaluation (RH).
+    GET /evaluations → Liste des évaluations.
+    GET /evaluations/:id → Détails d'une évaluation.
+    PUT /evaluations/:id → Modifier une évaluation (RH).
+    DELETE /evaluations/:id → Supprimer une évaluation (RH/Admin).
+
+4. Gestion des feuilles de temps
+    POST /timesheets → Ajouter une feuille de temps (Employé).
+    GET /timesheets → Liste des feuilles de temps.
+    GET /timesheets/:id → Détails d'une feuille de temps.
+    PUT /timesheets/:id/validate → Valider une feuille de temps (RH).
+    DELETE /timesheets/:id → Supprimer une feuille de temps.
+
+5. Notifications
+    GET /notifications → Liste des notifications d'un utilisateur.
+    POST /notifications → Envoyer une notification.
+
+6. Reporting & Exportation de données
+    GET /reports/employees → Rapport sur les employés.
+    GET /reports/leaves → Rapport sur les congés.
+    GET /reports/performance → Rapport sur les performances.
+    GET /reports/timesheets → Rapport sur les feuilles de temps.
+    GET /reports/export/excel → Exporter les rapports en Excel.
+    GET /reports/export/pdf → Exporter les rapports en PDF.
+
+**USERS**
+
+Employé (Employee)
+    Peut consulter ses informations personnelles.
+    Peut demander des congés.
+    Peut consulter ses évaluations de performance.
+    Peut saisir ses feuilles de temps.
+    Reçoit des notifications sur ses congés et évaluations.
+
+RH (Ressources Humaines - HR)
+    Peut gérer les employés (CRUD).
+    Peut approuver ou refuser les demandes de congé.
+    Peut ajouter et consulter les évaluations de performance.
+    Peut valider les feuilles de temps des employés.
+    Accède aux rapports et statistiques.
+    Reçoit des notifications pour les demandes de congé et évaluations.
+
+Administrateur (Admin)
+    Gère tous les employés et les RH (CRUD).
+    Peut gérer toutes les fonctionnalités RH.
+    Gère les rôles et permissions des utilisateurs.
+    Peut exporter les données (Excel/PDF).
+    Accède aux rapports globaux de l'entreprise.
