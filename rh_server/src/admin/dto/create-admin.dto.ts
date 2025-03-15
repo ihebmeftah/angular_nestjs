@@ -1,7 +1,6 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { UserRole } from "../entities/user_roles.enum";
+import { IsEmail, IsNotEmpty, IsOptional, IsString, IsStrongPassword } from "class-validator";
 
-export class CreateUserDto {
+export class CreateAdminDto {
     @IsEmail()
     @IsNotEmpty()
     email: string;

@@ -1,6 +1,6 @@
 import { CreateDateColumn, DeleteDateColumn, VersionColumn, UpdateDateColumn } from "typeorm";
 
-export class BaseEntity {
+export class TimestampBaseEntity {
     @CreateDateColumn({
         type: Date,
         name: 'created_at',
@@ -22,3 +22,4 @@ export class BaseEntity {
     @VersionColumn()
     version: number;
 }
+
