@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UUID } from 'crypto';
-import { UserRole } from './entities/user_roles.enum';
+import { UserRole } from '../enums/user_roles.enum';
 
 @Controller('user')
 export class UserController {
