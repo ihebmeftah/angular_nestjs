@@ -1,0 +1,403 @@
+{
+    "info": {
+        "_postman_id": "44d58349-c1c7-4512-918e-666fc9d02dd8",
+        "name": "rh_managment",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "authentificaiton",
+            "item": [
+                {
+                    "name": "login",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/auth/login",
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "login"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\":\"admin@admin.com\",\n  \"password\":\"admin\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "who me",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/auth/me",
+                            "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "me"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NWY5NzA2LTJjN2ItNDJjMi1iNjJjLTIyMzE4YzQzY2YwZiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQyMTQ2MTU1LCJleHAiOjE3NDIyMzI1NTV9.zfTKAdu7AqsllIwdg4zqhDwVgERBIF4zGUi7h4hU7d0",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "users",
+            "item": [
+                {
+                    "name": "get users",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/user",
+                            "path": [
+                                "api",
+                                "v1",
+                                "user"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NWY5NzA2LTJjN2ItNDJjMi1iNjJjLTIyMzE4YzQzY2YwZiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQyMDg2MzU0LCJleHAiOjE3NDIxNzI3NTR9.PeybnDE6kaDXbuwNShSBsat9qhSwQgb4UL-gPu3mZxc",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "get user by id",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/user/96f31e33-16d0-4bc3-9f6b-ab5ede7e11f3",
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "96f31e33-16d0-4bc3-9f6b-ab5ede7e11f3"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NWY5NzA2LTJjN2ItNDJjMi1iNjJjLTIyMzE4YzQzY2YwZiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQyMTcwNjgzLCJleHAiOjE3NDIyNTcwODN9.Oar3Wttv6O6bJBSJAUFaYfv2bICcBE6gE5AqRxwhDiw",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "remove user by id",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/user/f76980b0-8f6d-47e1-b9bc-70a3ccb0bf2d",
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "f76980b0-8f6d-47e1-b9bc-70a3ccb0bf2d"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        }
+                    }
+                },
+                {
+                    "name": "update user",
+                    "request": {
+                        "method": "PATCH",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/user/d403449e-f75b-4c92-9085-9bc7efad0aa0",
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "d403449e-f75b-4c92-9085-9bc7efad0aa0"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"firstName\":\"iheb\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "create RH",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/user/rh",
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "rh"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\":\"rh2@admin.com\",\n  \"firstName\":\"rh2\",\n  \"lastName\":\"rh2\",\n  \"password\":\"rh2\"\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NWY5NzA2LTJjN2ItNDJjMi1iNjJjLTIyMzE4YzQzY2YwZiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQyMDg2MzU0LCJleHAiOjE3NDIxNzI3NTR9.PeybnDE6kaDXbuwNShSBsat9qhSwQgb4UL-gPu3mZxc",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "create EMPLOYER",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/user/employer",
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "employer"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\":\"employer2@admin.com\",\n  \"firstName\":\"employer\",\n  \"lastName\":\"employer\",\n  \"password\":\"employer\"\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NWY5NzA2LTJjN2ItNDJjMi1iNjJjLTIyMzE4YzQzY2YwZiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQyMDg2MzU0LCJleHAiOjE3NDIxNzI3NTR9.PeybnDE6kaDXbuwNShSBsat9qhSwQgb4UL-gPu3mZxc",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "admin",
+            "item": [
+                {
+                    "name": "get admins",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/admin",
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NWY5NzA2LTJjN2ItNDJjMi1iNjJjLTIyMzE4YzQzY2YwZiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQyMTQ2MTU1LCJleHAiOjE3NDIyMzI1NTV9.zfTKAdu7AqsllIwdg4zqhDwVgERBIF4zGUi7h4hU7d0",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "get admin by id",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/admin/fe7be431-34de-40a9-bbdd-af32ed98c374",
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "fe7be431-34de-40a9-bbdd-af32ed98c374"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        }
+                    }
+                },
+                {
+                    "name": "remove admin by id",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/admin/fe7be431-34de-40a9-bbdd-af32ed98c374",
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "fe7be431-34de-40a9-bbdd-af32ed98c374"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        }
+                    }
+                },
+                {
+                    "name": "update admin",
+                    "request": {
+                        "method": "PATCH",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/admin/ceeff27f-7129-4c67-8e7f-25af6b991bdb",
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "ceeff27f-7129-4c67-8e7f-25af6b991bdb"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"firstName\":\"admin2\"\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NWY5NzA2LTJjN2ItNDJjMi1iNjJjLTIyMzE4YzQzY2YwZiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQyMTQ2MTU1LCJleHAiOjE3NDIyMzI1NTV9.zfTKAdu7AqsllIwdg4zqhDwVgERBIF4zGUi7h4hU7d0",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "create admin",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "localhost:3000/api/v1/admin",
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\":\"admin2@admin.com\",\n  \"firstName\":\"admin2\",\n  \"lastName\":\"admin2\",\n  \"password\":\"admin2\"\n}"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE1NWY5NzA2LTJjN2ItNDJjMi1iNjJjLTIyMzE4YzQzY2YwZiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzQyMTQ2MTU1LCJleHAiOjE3NDIyMzI1NTV9.zfTKAdu7AqsllIwdg4zqhDwVgERBIF4zGUi7h4hU7d0",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
