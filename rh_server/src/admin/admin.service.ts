@@ -6,8 +6,6 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Admin } from './entities/admin.entity';
 import { UUID } from 'crypto';
-import { UserRole } from 'src/enums/user_roles.enum';
-import { UserBaseEntity } from 'database/user.base';
 
 @Injectable()
 export class AdminService {
@@ -19,7 +17,7 @@ export class AdminService {
       throw new ConflictException(`User with this ${createAdminDto.email} already exists`);
     }
     createAdminDto.password = await hash(createAdminDto.password, 10);
-    const newUser = await this.adminRepo.create({ ...createAdminDto, role: UserRole.ADMIN });
+    const newUser = await this.adminRepo.create(createAdminDto);
     return await this.adminRepo.save(newUser);
   }
 
@@ -51,8 +49,11 @@ export class AdminService {
     return await this.adminRepo.remove(user);
   }
 
-  async findOneByEmail(email: string): Promise<UserBaseEntity | null> {
+  async findOneByEmail(email: string): Promise<Admin> {
     const user = await this.adminRepo.findOneBy({ email });
+    if (!user) {
+      throw new NotFoundException("User with this email not found");
+    }
     return user;
   }
 }

@@ -23,7 +23,4 @@ export class UserBaseEntity extends TimestampBaseEntity {
 
     @Column({ nullable: true })
     photo: string;
-
-    @Column({ enum: UserRole })
-    role: UserRole;
 }

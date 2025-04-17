@@ -7,7 +7,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
 import { UUID } from 'crypto';
 import { UserRole } from '../enums/user_roles.enum';
-import { UserBaseEntity } from 'database/user.base';
 
 @Injectable()
 export class UserService {
@@ -62,8 +61,11 @@ export class UserService {
     return await this.userRepo.remove(user);
   }
 
-  async findOneByEmail(email: string): Promise<UserBaseEntity | null> {
+  async findOneByEmail(email: string): Promise<User> {
     const user = await this.userRepo.findOneBy({ email });
+    if (!user) {
+      throw new NotFoundException("User with this email not found");
+    }
     return user;
   }
 
