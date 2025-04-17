@@ -5,6 +5,7 @@ import { typeOrmAsyncConfig } from 'database/data-source';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { AdminModule } from './admin/admin.module';
+import { TimetablesModule } from './timetables/timetables.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AdminModule } from './admin/admin.module';
     UserModule,
     AuthModule,
     AdminModule,
+    TimetablesModule,
   ],
   controllers: [],
   providers: [],
