@@ -49,11 +49,8 @@ export class AdminService {
     return await this.adminRepo.remove(user);
   }
 
-  async findOneByEmail(email: string): Promise<Admin> {
-    const user = await this.adminRepo.findOneBy({ email });
-    if (!user) {
-      throw new NotFoundException("User with this email not found");
-    }
-    return user;
+  async findOneByEmail(email: string): Promise<Admin | null> {
+    return await this.adminRepo.findOneBy({ email });
+
   }
 }

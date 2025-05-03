@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { UserService } from 'src/user/user.service';
 import { compare } from 'bcrypt';
@@ -17,9 +17,12 @@ export class AuthService {
         private readonly jwtService: JwtService
     ) { }
     async login(loginDto: LoginDto): Promise<{ token: string }> {
-        let loggedUser: Admin | User;
+        let loggedUser: Admin | User | null;
         loggedUser = await this.adminService.findOneByEmail(loginDto.email);
         loggedUser ??= await this.userService.findOneByEmail(loginDto.email);
+        if (!loggedUser) {
+            throw new NotFoundException("User not found");
+        }
         const isMatch = await compare(loginDto.password, loggedUser.password);
         const payload = {
             id: loggedUser.id,
