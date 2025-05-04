@@ -2,11 +2,12 @@ import { ConflictException, Injectable, NotFoundException } from '@nestjs/common
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { Equal, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
 import { UUID } from 'crypto';
 import { UserRole } from '../enums/user_roles.enum';
+import { Interval } from '@nestjs/schedule';
 
 @Injectable()
 export class UserService {
@@ -57,6 +58,24 @@ export class UserService {
       ...updateUserDto
     }
     return updated;
+  }
+
+  async decrementCongeNb(id: UUID): Promise<boolean> {
+    const user = await this.findOne(id);
+    await this.userRepo.update(id, { congeNb: user.congeNb - 1 });
+    return true;
+  }
+
+  @Interval(300000)
+  // @Cron(CronExpression.EVERY_1ST_DAY_OF_MONTH_AT_MIDNIGHT) 
+  //reset every month
+  async resestCongeNb(id: UUID) {
+    const result = await this.userRepo.createQueryBuilder()
+      .update(User)
+      .set({ congeNb: 8 })
+      .where('congeNb != :value', { value: 8 })
+      .execute();
+    console.log(`Reset conge number to 8 ${result.affected} `);
   }
 
   async removeRh(id: UUID): Promise<User> {

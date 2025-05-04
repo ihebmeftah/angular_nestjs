@@ -7,4 +7,6 @@ import { Column, Entity } from 'typeorm';
 export class User extends UserBaseEntity {
     @Column({ enum: UserRole })
     role: UserRole;
+    @Column({ default: 8 })
+    congeNb: number;
 }
