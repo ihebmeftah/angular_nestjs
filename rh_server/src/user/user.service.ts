@@ -38,8 +38,11 @@ export class UserService {
     return await this.userRepo.find();
   }
 
-  async findOne(id: UUID): Promise<User> {
-    const user = await this.userRepo.findOneBy({ id });
+  async findOne(id: UUID, role?: UserRole): Promise<User> {
+    const user = await this.userRepo.findOneBy({
+      id,
+      ...(role && { role })
+    });
     if (!user) {
       throw new NotFoundException(`User with this ${id} not found`);
     }
@@ -56,10 +59,16 @@ export class UserService {
     return updated;
   }
 
-  async remove(id: UUID): Promise<User> {
-    const user = await this.findOne(id);
+  async removeRh(id: UUID): Promise<User> {
+    const user = await this.findOne(id, UserRole.RH);
     return await this.userRepo.remove(user);
   }
+
+  async removeEmployer(id: UUID): Promise<User> {
+    const user = await this.findOne(id, UserRole.EMPLOYER);
+    return await this.userRepo.remove(user);
+  }
+
 
   async findOneByEmail(email: string): Promise<User | null> {
     const user = await this.userRepo.findOneBy({ email });
