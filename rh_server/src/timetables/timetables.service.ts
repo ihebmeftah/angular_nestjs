@@ -1,6 +1,5 @@
 import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { CreateTimetableDto } from './dto/create-timetable.dto';
-import { UpdateTimetableDto } from './dto/update-timetable.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Timetable } from './entities/timetable.entity';
 import { Repository } from 'typeorm';
