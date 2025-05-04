@@ -17,8 +17,6 @@ export class Timetable extends TimestampBaseEntity {
     endTime: string;
     @Column({ default: false })
     validated: boolean;
-    @Column()
-    userId: UUID;
     @ManyToOne(() => User, { onDelete: 'CASCADE' })
     user: User;
 }

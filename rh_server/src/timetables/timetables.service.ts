@@ -29,7 +29,6 @@ export class TimetablesService {
       startTime,
       endTime,
       validated: false,
-      userId: userId,
       user,
     });
     return await this.timetableRepository.save(created);
@@ -43,7 +42,7 @@ export class TimetablesService {
       if (user.role == UserRole.EMPLOYER) {
         return this.timetableRepository.find({
           where: {
-            userId,
+            user: { id: userId },
           }
         });
       }
