@@ -7,6 +7,6 @@ export class CreateTimetableDto {
 
     @IsDateString()
     @IsNotEmpty()
-    end: string;
+    end: Date;
 }
 
