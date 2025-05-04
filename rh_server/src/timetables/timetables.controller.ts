@@ -1,34 +1,40 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, UseGuards, Req, ParseUUIDPipe } from '@nestjs/common';
 import { TimetablesService } from './timetables.service';
 import { CreateTimetableDto } from './dto/create-timetable.dto';
-import { UpdateTimetableDto } from './dto/update-timetable.dto';
+import { JwtAuthGuard } from 'src/auth/guard/auth.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { UserRole } from 'src/enums/user_roles.enum';
+import { UUID } from 'crypto';
 
 @Controller('timetables')
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class TimetablesController {
-  constructor(private readonly timetablesService: TimetablesService) {}
+  constructor(private readonly timetablesService: TimetablesService) { }
 
   @Post()
-  create(@Body() createTimetableDto: CreateTimetableDto) {
-    return this.timetablesService.create(createTimetableDto);
+  @Roles(UserRole.EMPLOYER)
+  create(
+    @Body() createTimetableDto: CreateTimetableDto,
+    @Req() req: any,
+  ) {
+    const userId = req.user.id;
+    return this.timetablesService.create(createTimetableDto, userId);
   }
 
   @Get()
-  findAll() {
-    return this.timetablesService.findAll();
+  findAll(
+    @Req() req: any,
+  ) {
+    const userId = req.user.id;
+    return this.timetablesService.findAll(userId);
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.timetablesService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTimetableDto: UpdateTimetableDto) {
-    return this.timetablesService.update(+id, updateTimetableDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.timetablesService.remove(+id);
+  @Patch(':id/validate')
+  validate(
+    @Param('id', ParseUUIDPipe) id: UUID,
+    @Req() req: any,
+  ) {
+    const userId = req.user.id;
+    return this.timetablesService.validate(userId, id);
   }
 }
