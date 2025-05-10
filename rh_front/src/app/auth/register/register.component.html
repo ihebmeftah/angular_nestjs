@@ -1,0 +1,47 @@
+<div class="container mt-5 " style="min-height: 100vh;">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h3 class="text-center mb-4">Register</h3>
+          <form class="p-5" (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" id="name" class="form-control" name="name" [(ngModel)]="name" required />
+              @if(registerForm.submitted && !name) {
+              <div class="text-danger">
+                Name is required.
+              </div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" class="form-control" name="email" [(ngModel)]="email" required email />
+              @if(registerForm.submitted && !email){
+              <div class="text-danger">
+                Valid email is required.
+              </div>
+              }
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" id="password" class="form-control" name="password" [(ngModel)]="password"
+                required />
+
+              @if (registerForm.submitted && !password) {
+              <div class="text-danger">
+                Password is required.
+              </div>
+              }
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="registerForm.invalid">Register</button>
+          </form>
+          <div class="text-center">
+            <p>Already have an account?</p>
+            <a routerLink="/auth/login" class="btn btn-link">Create account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
