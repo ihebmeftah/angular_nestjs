@@ -3,10 +3,15 @@
     <div class="col-md-6">
       <div class="card shadow-lg">
         <div class="card-body">
+          <div class="text-center mb-4">
+            <img src="auth.jpg" alt="Login" class="img-fluid" style="max-height: 150px;">
+          </div>
           <h3 class="text-center mb-4">Welcome Back!</h3>
-          <form class="p-5" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+          <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
             <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
+              <label for="email" class="form-label">
+                <i class="bi bi-envelope"></i> Email
+              </label>
               <input type="email" id="email" class="form-control" name="email" [(ngModel)]="email" required
                 #emailInput="ngModel" email />
               @if(emailInput.invalid && emailInput.touched && !email) {
@@ -16,7 +21,9 @@
               }
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
+              <label for="password" class="form-label">
+                <i class="bi bi-lock"></i> Password
+              </label>
               <input type="password" id="password" class="form-control" name="password" [(ngModel)]="password" required
                 #passwordInput="ngModel" />
               @if(passwordInput.invalid && passwordInput.touched) {
