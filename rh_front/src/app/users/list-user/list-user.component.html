@@ -1,0 +1,64 @@
+<div class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">User Management</h1>
+    <div class="table-controls">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" placeholder="Search users...">
+      </div>
+      <!--    <button class="filter-btn">
+        <span class="filter-icon">⏷</span>
+        <span>Filter</span>
+      </button> -->
+    </div>
+  </div>
+
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th>Last Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track $index) {
+      <tr>
+        <td>
+          <div class="user-info">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="user-avatar">
+            <div>
+              <div class="user-name">{{user.name}}</div>
+              <div class="user-email">{{user.email}}</div>
+            </div>
+          </div>
+        </td>
+        <td>{{user.role}}</td>
+        <td><span class="status-badge status-active">Active</span></td>
+        <td>2 hours ago</td>
+        <td>
+          <button class="action-btn" title="Edit" routerLink="/users/{{user.id}}/update">✏️</button>
+          <button class="action-btn" title="View" routerLink="/users/{{user.id}}">👁️</button>
+          <button class="action-btn" title="Delete">🗑️</button>
+        </td>
+      </tr>
+      }
+
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button class="page-btn disabled">❮</button>
+    <button class="page-btn active">1</button>
+    <button class="page-btn">2</button>
+    <button class="page-btn">3</button>
+    <button class="page-btn">❯</button>
+  </div>
+</div>
+
+<!-- Floating Action Button -->
+<button class="fab" routerLink="/users/add">
+  <span class="fab-icon">+</span>
+</button>
