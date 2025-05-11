@@ -1,2 +1,8 @@
-<router-outlet>
-</router-outlet>
+<div class="layout-container">
+  @if (!isAuthPage()) {
+  <app-sidebar></app-sidebar>
+  }
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
