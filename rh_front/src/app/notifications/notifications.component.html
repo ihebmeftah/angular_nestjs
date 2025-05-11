@@ -1,0 +1,80 @@
+<div class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">Notifications</h1>
+    <button class="mark-all-read">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      </svg>
+      Mark all as read
+    </button>
+  </div>
+
+  <div class="notification-tabs">
+    <div class="tab" [ngClass]="{'active': selectedTab == 'all'}" (click)="changeTab('all')">
+      All
+      <span class="tab-count">{{notifications.length}}</span>
+    </div>
+    <div class="tab" [ngClass]="{'active': selectedTab == 'unread'}" (click)="changeTab('unread')">
+      Unread
+      <span class="tab-count">{{unreadNb}}</span>
+    </div>
+    <div class="tab" [ngClass]="{'active': selectedTab == 'read'}" (click)="changeTab('read')">
+      Read
+      <span class="tab-count">{{readNb}}</span>
+    </div>
+
+  </div>
+
+  <div class="notification-list">
+    @for (n of filterNotif; track $index) {
+    <div class="notification-item" [ngClass]="{'unread': !n.read}">
+      @if (n.read == false) {<div class="unread-indicator"></div>}
+      <div class="notification-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+      </div>
+      <div class="notification-content">
+        <div class="notification-title">New Message Received</div>
+        <div class="notification-message">
+          You have a new message from John Doe: "Hey, just wanted to follow up on our project deadline..."
+        </div>
+        <div class="notification-time">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          10 minutes ago
+        </div>
+      </div>
+      <div class="notification-actions">
+        @if (n.read == false) {
+        <button class="action-btn" title="Mark as read" (ng-click)="markNotificationAsRead(n.id)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </button>
+        }
+        <button class="action-btn" title="Delete">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    }
+
+
+
+    <!-- Empty State Example (hidden by default) -->
+    <!-- <div class="empty-state">
+          <div class="empty-icon">🔔</div>
+          <h3>No new notifications</h3>
+          <p>You're all caught up! Check back later for updates.</p>
+      </div> -->
+  </div>
+</div>
