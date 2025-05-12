@@ -20,6 +20,19 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
   },
   {
+    path: 'conges',
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./conges/list-conge/list-conge.component').then(m => m.ListCongeComponent)
+      },
+      {
+        path: 'add',
+        loadComponent: () => import('./conges/add-conge/add-conge.component').then(m => m.AddCongeComponent)
+      }
+    ]
+  },
+  {
     path: 'notifications',
     loadComponent: () => import('./notifications/notifications.component').then(m => m.NotificationsComponent)
   },
