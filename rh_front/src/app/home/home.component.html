@@ -1,1 +1,185 @@
-<p>home works!</p>
+<div class="container">
+  <div class="header">
+    <h1>Dashboard RH</h1>
+    <div class="date-display">Aujourd'hui, 15 juin 2023</div>
+  </div>
+
+  <div class="stats-grid">
+    <!-- Employee Stats -->
+    <div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-title">Employés Totaux</div>
+        <div class="stat-icon icon-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+          </svg>
+        </div>
+      </div>
+      <div class="stat-value">142</div>
+      <div class="stat-change change-positive">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 14l5-5 5 5z" />
+        </svg>
+        +8% depuis le mois dernier
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-title">Nouveaux Employés</div>
+        <div class="stat-icon icon-success">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+          </svg>
+        </div>
+      </div>
+      <div class="stat-value">12</div>
+      <div class="stat-change change-positive">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 14l5-5 5 5z" />
+        </svg>
+        +3 depuis le mois dernier
+      </div>
+    </div>
+
+
+    <!-- Leave Stats -->
+    <div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-title">Congés en Cours</div>
+        <div class="stat-icon icon-warning">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+          </svg>
+        </div>
+      </div>
+      <div class="stat-value">18</div>
+      <div class="stat-change change-neutral">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M22 12l-4-4v3H3v2h15v3l4-4z" />
+        </svg>
+        Stable depuis la semaine dernière
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-title">Demandes en Attente</div>
+        <div class="stat-icon icon-info">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
+          </svg>
+        </div>
+      </div>
+      <div class="stat-value">7</div>
+      <div class="stat-change change-positive">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 14l5-5 5 5z" />
+        </svg>
+        -3 depuis hier
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-title">Congés Refusés</div>
+        <div class="stat-icon icon-danger">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+          </svg>
+        </div>
+      </div>
+      <div class="stat-value">3</div>
+      <div class="stat-change change-negative">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7 10l5 5 5-5z" />
+        </svg>
+        +1 cette semaine
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-section">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">Répartition des Employés par Département</div>
+        <div class="chart-period">Ce mois-ci</div>
+      </div>
+      <div class="chart-placeholder">
+        [Graphique: Répartition par département]
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">Historique des Congés</div>
+        <div class="chart-period">6 derniers mois</div>
+      </div>
+      <div class="chart-placeholder">
+        [Graphique: Évolution des congés]
+      </div>
+    </div>
+  </div>
+
+  <div class="recent-activity">
+    <div class="activity-header">
+      <div class="activity-title">Activité Récente</div>
+      <a href="#" class="activity-view-all">Voir tout</a>
+    </div>
+
+    <div class="activity-item">
+      <div class="activity-icon" style="background-color: var(--primary-light); color: var(--primary);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
+        </svg>
+      </div>
+      <div class="activity-content">
+        <div class="activity-message">Nouvel employé: Thomas Leroy a rejoint l'équipe IT</div>
+        <div class="activity-time">Il y a 2 heures</div>
+      </div>
+    </div>
+
+    <div class="activity-item">
+      <div class="activity-icon" style="background-color: #d1fae5; color: var(--success);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+        </svg>
+      </div>
+      <div class="activity-content">
+        <div class="activity-message">Marie Martin a approuvé le congé de Sophie Bernard</div>
+        <div class="activity-time">Aujourd'hui, 10:45</div>
+      </div>
+    </div>
+
+    <div class="activity-item">
+      <div class="activity-icon" style="background-color: #fee2e2; color: var(--danger);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+        </svg>
+      </div>
+      <div class="activity-content">
+        <div class="activity-message">Pierre Lambert a rejeté la demande de congé de Jean Dupont</div>
+        <div class="activity-time">Hier, 16:30</div>
+      </div>
+    </div>
+
+    <div class="activity-item">
+      <div class="activity-icon" style="background-color: #dbeafe; color: var(--info);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
+        </svg>
+      </div>
+      <div class="activity-content">
+        <div class="activity-message">Nouveau rapport RH généré: Taux d'absentéisme</div>
+        <div class="activity-time">Hier, 14:15</div>
+      </div>
+    </div>
+  </div>
+</div>
