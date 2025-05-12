@@ -8,6 +8,7 @@ import { UserBaseEntity } from 'database/user.base';
 import { User } from 'src/user/entities/user.entity';
 import { Admin } from 'src/admin/entities/admin.entity';
 import { UserRole } from 'src/enums/user_roles.enum';
+import { CreateAdminDto } from 'src/admin/dto/create-admin.dto';
 
 @Injectable()
 export class AuthService {
@@ -35,6 +36,10 @@ export class AuthService {
             };
         }
         throw new BadRequestException("Password incorrect");;
+    }
+
+    async register(createAdminDto: CreateAdminDto): Promise<Admin> {
+        return await this.adminService.create(createAdminDto);
     }
 
 }
