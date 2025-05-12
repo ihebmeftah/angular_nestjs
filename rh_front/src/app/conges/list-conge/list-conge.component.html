@@ -1,108 +1,106 @@
-<div class="container">
-  <header>
-    <h1>Gestion des Demandes de Congé</h1>
-    <div>
-      <span>Total: 24 demandes</span>
+<!-- list-conge.component.html -->
+<div class="main-content">
+  <div class="page-header">
+    <h1 class="page-title">Leave Requests Management</h1>
+    <div class="table-controls">
+
+
+      <div class="filter-controls">
+        <div class="filter-group">
+          <label>Leave Type:</label>
+          <select class="form-control">
+            <option value="">All Types</option>
+            <option value="vacation">Maladie</option>
+            <option value="sick">Formation</option>
+            <option value="maternity">Sante</option>
+            <option value="paternity">Vacances</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>From:</label>
+          <input type="date" class="form-control">
+        </div>
+
+        <div class="filter-group">
+          <label>To:</label>
+          <input type="date" class="form-control">
+        </div>
+
+        <button class="btn btn-secondary">
+          Reset Filters
+        </button>
+      </div>
     </div>
-  </header>
-
-  <div class="filters">
-    <select id="status-filter">
-      <option value="all">Tous les statuts</option>
-      <option value="pending">En attente</option>
-      <option value="approved">Approuvé</option>
-      <option value="rejected">Rejeté</option>
-    </select>
-
-    <select id="type-filter">
-      <option value="all">Tous les types</option>
-      <option value="conge_maladie">Congé maladie</option>
-      <option value="conge_de_formation">Congé de formation</option>
-      <option value="conge_de_sante">Congé de santé</option>
-      <option value="conge_de_vacances">Congé de vacances</option>
-    </select>
-
-    <input type="date" id="start-date-filter" placeholder="Date de début">
-    <input type="date" id="end-date-filter" placeholder="Date de fin">
-
-    <button class="filter-btn">Filtrer</button>
   </div>
 
-  <table class="requests-table">
+  <table class="user-table">
     <thead>
       <tr>
-        <th>Employé</th>
-        <th>Type de congé</th>
-        <th>Date de début</th>
-        <th>Date de fin</th>
-        <th>Statut</th>
+        <th>Employee</th>
+        <th>Leave Type</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Status</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
+      @for (conge of conges; track $index) {
       <tr>
-        <td>Jean Dupont</td>
-        <td><span class="conge-type conge-maladie">Congé maladie</span></td>
-        <td>15/06/2023</td>
-        <td>20/06/2023</td>
-        <td class="status-pending">En attente</td>
-        <td class="action-buttons">
-          <button class="btn btn-approve">Approuver</button>
-          <button class="btn btn-reject">Rejeter</button>
+        <td>
+          <div class="user-info">
+            <img [src]="conge.user.avatar" class="user-avatar">
+            <div>
+              <div class="user-name">{{conge.user.name}}</div>
+              <div class="user-email">{{conge.user.email}}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <span>
+            @switch (conge.type) {
+            @case ("conge_maladie") {<span>conge_maladie</span>}
+            @case ("conge_de_formation") {<span>conge_de_formation</span>}
+            @case ("conge_de_sante") {<span>conge_de_sante</span>}
+            @case ("conge_de_vacances") {<span>Parental Leave</span>}
+
+            }
+          </span>
+        </td>
+        <td>{{conge.startDate}}</td>
+        <td>{{conge.endDate}}</td>
+        <td>
+          <span class="status-badge" [ngClass]="{
+              'status-active': conge.status === 'approved',
+              'status-inactive': conge.status === 'rejected',
+              'status-pending': conge.status === 'pending'
+            }">
+            {{conge.status}}
+          </span>
+        </td>
+        <td>
+          @if (conge.status === 'pending') {
+          <button class="action-btn approve-btn" title="Approve">✓</button>
+          <button class="action-btn reject-btn" title="Reject">✗</button>
+          }
         </td>
       </tr>
-      <tr>
-        <td>Marie Martin</td>
-        <td><span class="conge-type conge-vacances">Congé de vacances</span></td>
-        <td>01/07/2023</td>
-        <td>15/07/2023</td>
-        <td class="status-approved">Approuvé</td>
-        <td class="action-buttons">
-          <button class="btn btn-approve" disabled>Approuver</button>
-          <button class="btn btn-reject">Rejeter</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Pierre Lambert</td>
-        <td><span class="conge-type conge-formation">Congé de formation</span></td>
-        <td>10/05/2023</td>
-        <td>12/05/2023</td>
-        <td class="status-rejected">Rejeté</td>
-        <td class="action-buttons">
-          <button class="btn btn-approve">Approuver</button>
-          <button class="btn btn-reject" disabled>Rejeter</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Sophie Bernard</td>
-        <td><span class="conge-type conge-sante">Congé de santé</span></td>
-        <td>22/06/2023</td>
-        <td>30/06/2023</td>
-        <td class="status-pending">En attente</td>
-        <td class="action-buttons">
-          <button class="btn btn-approve">Approuver</button>
-          <button class="btn btn-reject">Rejeter</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Thomas Leroy</td>
-        <td><span class="conge-type conge-maladie">Congé maladie</span></td>
-        <td>05/07/2023</td>
-        <td>10/07/2023</td>
-        <td class="status-pending">En attente</td>
-        <td class="action-buttons">
-          <button class="btn btn-approve">Approuver</button>
-          <button class="btn btn-reject">Rejeter</button>
-        </td>
-      </tr>
+      }
+
     </tbody>
   </table>
 
   <div class="pagination">
-    <button disabled>Précédent</button>
-    <button class="active">1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>Suivant</button>
+    <button class="page-btn disabled">❮</button>
+    <button class="page-btn active">1</button>
+    <button class="page-btn">2</button>
+    <button class="page-btn">3</button>
+    <button class="page-btn">❯</button>
   </div>
 </div>
+
+<!-- Floating Action Button -->
+<button class="fab" routerLink="/conges/add">
+  <span class="fab-icon">+</span>
+</button>
