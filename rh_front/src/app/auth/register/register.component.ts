@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,17 +9,23 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  name: string = '';
+  fname: string = '';
+  lname: string = '';
   email: string = '';
   password: string = '';
-
-  onSubmit(form: any) {
-    // Check if the form is valid
+  cpassword: string = '';
+  constructor(private _router: Router) { }
+  onRegister(form: any) {
     if (form.valid) {
-      console.log('Register Data:', { name: this.name, email: this.email, password: this.password });
+      console.log('Register Data:', {
+        fname: this.fname,
+        lname: this.lname,
+        email: this.email,
+        password: this.password,
+        cpassword: this.cpassword
+      });
+      this._router.navigateByUrl('/auth/login');
     }
-    else {
-      console.error('Form is invalid');
-    }
+
   }
 }

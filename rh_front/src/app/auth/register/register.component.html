@@ -1,56 +1,82 @@
-<div class="container mt-5 " style="min-height: 100vh;">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow-lg">
-        <div class="card-body">
-          <div class="text-center mb-4">
-            <img src="auth.jpg" alt="Register" class="img-fluid" style="max-height: 150px;">
-          </div>
-          <h3 class="text-center mb-4">Register</h3>
-          <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm">
-            <div class="mb-3">
-              <label for="name" class="form-label">
-                <i class="bi bi-person"></i> Name
-              </label>
-              <input type="text" id="name" class="form-control" name="name" [(ngModel)]="name" required />
-              @if(registerForm.submitted && !name) {
-              <div class="text-danger">
-                Name is required.
-              </div>
-              }
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">
-                <i class="bi bi-envelope"></i> Email
-              </label>
-              <input type="email" id="email" class="form-control" name="email" [(ngModel)]="email" required email />
-              @if(registerForm.submitted && !email){
-              <div class="text-danger">
-                Valid email is required.
-              </div>
-              }
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">
-                <i class="bi bi-lock"></i> Password
-              </label>
-              <input type="password" id="password" class="form-control" name="password" [(ngModel)]="password"
-                required />
+<form class="register-form" #registerForm="ngForm">
+  <div class="form-logo">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="#4f46e5">
+      <path d="M12 2L4 7v10l8 5 8-5V7L12 2zm0 2.5L18 7v4l-6 3.5L6 11V7l6-4.5z" />
+    </svg>
+    <span style="font-weight: 600;">Dashboard</span>
+  </div>
 
-              @if (registerForm.submitted && !password) {
-              <div class="text-danger">
-                Password is required.
-              </div>
-              }
-            </div>
-            <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="registerForm.invalid">Register</button>
-          </form>
-          <div class="text-center">
-            <p>Already have an account?</p>
-            <a routerLink="/auth/login" class="btn btn-link">Create account</a>
-          </div>
-        </div>
+  <h1 class="form-title">Create your account</h1>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" placeholder="John" name="fname" [(ngModel)]="fname" required
+        #fnameInput="ngModel" />
+      @if(fnameInput.invalid && fnameInput.touched ) {
+      <div class="text-danger">
+        First name is required.
       </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" placeholder="Doe" name="lname" [(ngModel)]="lname" required
+        #lnameInput="ngModel" />
+      @if(lnameInput.invalid && lnameInput.touched) {
+      <div class="text-danger">
+        Last name is required.
+      </div>
+      }
     </div>
   </div>
-</div>
+
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" placeholder="you@example.com" name="email" [(ngModel)]="email" required
+      #emailInput="ngModel" email />
+    @if(emailInput.invalid && emailInput.touched) {
+    <div class="text-danger">
+      Email is required.
+    </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="••••••••" name="password" [(ngModel)]="password" required
+      #passwordInput="ngModel" />
+    @if(passwordInput.invalid && passwordInput.touched) {
+    <div class="text-danger">
+      Password is required.
+    </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" id="confirmPassword" placeholder="••••••••" name="cpassword" [(ngModel)]="cpassword" required
+      #cpasswordInput="ngModel" />
+    @if(cpasswordInput.invalid && cpasswordInput.touched) {
+    <div class="text-danger">
+      Confirm Password is required.
+    </div>
+    }
+    @if(cpasswordInput.value !== passwordInput.value && cpasswordInput.touched) {
+    <div class="text-danger">
+      Passwords do not match.
+    </div>
+    }
+  </div>
+
+  <p class="terms">
+    By creating an account, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+  </p>
+
+  <button type="submit" class="btn" (click)="onRegister(registerForm)">Create Account</button>
+
+  <p class="form-footer">
+    Already have an account? <a routerLink="/auth/login">Sign in</a>
+  </p>
+</form>

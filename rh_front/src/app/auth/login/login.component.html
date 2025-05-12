@@ -1,44 +1,101 @@
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow-lg">
-        <div class="card-body">
-          <div class="text-center mb-4">
-            <img src="auth.jpg" alt="Login" class="img-fluid" style="max-height: 150px;">
+<div class="login-container">
+  <!-- Left side with welcome message -->
+  <div class="login-side">
+    <div class="login-side-content">
+      <h1>Welcome Back</h1>
+      <p>Sign in to access your dashboard, manage your account, and explore all the features we've prepared for you.</p>
+
+      <div class="login-features">
+        <div class="login-feature">
+          <div class="login-feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+            </svg>
           </div>
-          <h3 class="text-center mb-4">Welcome Back!</h3>
-          <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-            <div class="mb-3">
-              <label for="email" class="form-label">
-                <i class="bi bi-envelope"></i> Email
-              </label>
-              <input type="email" id="email" class="form-control" name="email" [(ngModel)]="email" required
-                #emailInput="ngModel" email />
-              @if(emailInput.invalid && emailInput.touched && !email) {
-              <div class="text-danger">
-                Email is required.
-              </div>
-              }
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">
-                <i class="bi bi-lock"></i> Password
-              </label>
-              <input type="password" id="password" class="form-control" name="password" [(ngModel)]="password" required
-                #passwordInput="ngModel" />
-              @if(passwordInput.invalid && passwordInput.touched) {
-              <div class="text-danger">
-                Password is required.
-              </div>
-              }
-            </div>
-            <button type="submit" class="btn btn-primary w-100 mb-3" [disabled]="loginForm.invalid">Login</button>
-          </form>
-          <div class="text-center">
-            <p>Don't have an account? </p>
-            <a routerLink="/auth/register" class="btn btn-link">Register Here</a>
+          <div>
+            <h3>Secure Access</h3>
+            <p>Enterprise-grade security to protect your data</p>
           </div>
         </div>
+
+        <div class="login-feature">
+          <div class="login-feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.31-8.86c-1.77-.45-2.34-.94-2.34-1.67 0-.84.79-1.43 2.1-1.43 1.38 0 1.9.66 1.94 1.64h1.71c-.05-1.34-.87-2.57-2.49-2.97V5H10.9v1.69c-1.51.32-2.72 1.3-2.72 2.81 0 1.79 1.49 2.69 3.66 3.21 1.95.46 2.34 1.15 2.34 1.87 0 .53-.39 1.39-2.1 1.39-1.6 0-2.23-.72-2.32-1.64H8.04c.1 1.7 1.36 2.66 2.86 2.97V19h2.34v-1.67c1.52-.29 2.72-1.16 2.73-2.77-.01-2.2-1.9-2.96-3.66-3.42z" />
+            </svg>
+          </div>
+          <div>
+            <h3>Powerful Analytics</h3>
+            <p>Get insights into your business performance</p>
+          </div>
+        </div>
+
+        <div class="login-feature">
+          <div class="login-feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5l7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5zm5.5-6.6c.61 0 1.1.49 1.1 1.1s-.49 1.1-1.1 1.1-1.1-.49-1.1-1.1.49-1.1 1.1-1.1z" />
+            </svg>
+          </div>
+          <div>
+            <h3>Customizable</h3>
+            <p>Tailor the dashboard to your specific needs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right side with login form -->
+  <div class="login-form-container">
+    <div class="login-logo">
+      <svg class="login-logo-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+        fill="#4f46e5">
+        <path d="M12 2L4 7v10l8 5 8-5V7L12 2zm0 2.5L18 7v4l-6 3.5L6 11V7l6-4.5z" />
+      </svg>
+      <span class="logo-text">Dashboard</span>
+    </div>
+
+    <div class="login-form">
+      <h2>Sign in to your account</h2>
+
+      <form #loginForm="ngForm">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" id="email" class="form-control" placeholder="you@example.com" name="email"
+            [(ngModel)]="email" required #emailInput="ngModel" email />
+          @if(emailInput.invalid && emailInput.touched) {
+          <div class="text-danger">
+            Email is required.
+          </div>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="••••••••" name="password"
+            [(ngModel)]="password" required #passwordInput="ngModel" />
+          @if(passwordInput.invalid && passwordInput.touched) {
+          <div class="text-danger">
+            Password is required.
+          </div>
+          }
+        </div>
+
+        <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <input type="checkbox" id="remember">
+            <label for="remember" style="display: inline; margin-left: 8px;">Remember me</label>
+          </div>
+          <a href="#" style="font-size: 14px; color: #4f46e5; text-decoration: none;">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="onLogin(loginForm)">Sign in</button>
+      </form>
+
+      <div class="login-footer">
+        Don't have an account? <a routerLink="/auth/register">Get started</a>
       </div>
     </div>
   </div>
