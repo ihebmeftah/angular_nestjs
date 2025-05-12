@@ -10,10 +10,10 @@
     <div class="profile-header">
       <img src="https://randomuser.me/api/portraits/women/44.jpg" class="user-avatar-lg">
       <div class="user-meta">
-        <h2 class="user-name-lg">Sarah Johnson</h2>
+        <h2 class="user-name-lg">{{ user!.name }}</h2>
         <span class="user-role-badge role-admin">Administrator</span>
         <div class="user-email-lg">
-          ✉️ sarah.johnsonexample.com
+          ✉️ {{ user!.email }}
         </div>
         <div class="user-joined">
           Member since June 12, 2021
@@ -56,16 +56,12 @@
       <div class="details-grid">
         <div class="detail-item">
           <div class="detail-label">Primary Email</div>
-          <div class="detail-value">sarah.johnsonexample.com</div>
+          <div class="detail-value">{{ user!.email }}</div>
         </div>
 
         <div class="detail-item">
           <div class="detail-label">Mobile Phone</div>
           <div class="detail-value">(555) 123-4567</div>
-        </div>
-        <div class="detail-item">
-          <div class="detail-label">Work Phone</div>
-          <div class="detail-value">(555) 987-6543</div>
         </div>
       </div>
     </div>
@@ -80,7 +76,7 @@
       <div class="details-grid">
         <div class="detail-item">
           <div class="detail-label">User Role</div>
-          <div class="detail-value">Administrator</div>
+          <div class="detail-value">{{ user!.role }}</div>
         </div>
         <div class="detail-item">
           <div class="detail-label">Last Login</div>
