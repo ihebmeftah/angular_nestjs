@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { needAuth, guestGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: 'auth',
+    canActivate: [guestGuard],
     children: [
       {
         path: 'login',
@@ -17,10 +19,18 @@ export const routes: Routes = [
   },
   {
     path: 'home',
+    canActivate: [needAuth],
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
+  },
+  {
+
+    path: '',
+    canActivate: [needAuth],
     loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
   },
   {
     path: 'conges',
+    canActivate: [needAuth],
     children: [
       {
         path: '',
@@ -34,13 +44,19 @@ export const routes: Routes = [
   },
   {
     path: 'notifications',
+    canActivate: [needAuth],
     loadComponent: () => import('./notifications/notifications.component').then(m => m.NotificationsComponent)
   },
   {
     path: 'users',
+    canActivate: [needAuth],
     loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
-  { path: 'not-found', component: NotfoundComponent }, // Wild route
+  {
+    path: 'not-found',
+    canActivate: [needAuth],
+    component: NotfoundComponent
+  }, // Wild route
   { path: '**', redirectTo: 'not-found' }, // Wild route
 ];
 
