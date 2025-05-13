@@ -89,10 +89,10 @@
   <div class="user-profile">
     <img src="https://randomuser.me/api/portraits/women/44.jpg" class="avatar">
     <div class="user-info">
-      <span class="user-name">Jane Doe</span>
-      <span class="user-role">Admin</span>
+      <span class="user-name">{{user!.fullname| titlecase}}</span>
+      <span class="user-role">{{user!.role | titlecase}}</span>
     </div>
-    <button class="logout-btn" routerLink="/auth/login">
+    <button class="logout-btn" routerLink="/auth/login" (click)="authS.logout()">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#64748b">
         <path
           d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />

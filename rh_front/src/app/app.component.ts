@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { SidebarComponent } from "./sidebar/sidebar.component";
+import { environment } from '../environments/environment.development';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,10 @@ export class AppComponent {
   }
 
   isAuthPage(): boolean {
-    return this.currentRoute === '/auth/login' || this.currentRoute === '/auth/register';
+    return localStorage.getItem('token') === null;
+  }
+
+  ngOnInit() {
+    console.log(environment.production ? "Production" : "Development" + " : " + environment.apiURL);
   }
 }
