@@ -13,7 +13,14 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  /// swagger config
+
+  app.enableCors({
+    origin: 'http://localhost:4200',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+    credentials: true,
+  });
+
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Project RH MANAGMENT')
     .setDescription('The Project RH MANAGMENT API description')
@@ -21,7 +28,7 @@ async function bootstrap() {
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, documentFactory);
-  /// start the app
+
   await app.listen(parseInt(process.env.PORT!));
 }
 bootstrap();
