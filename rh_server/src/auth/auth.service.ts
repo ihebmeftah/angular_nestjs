@@ -17,7 +17,7 @@ export class AuthService {
         private readonly adminService: AdminService,
         private readonly jwtService: JwtService
     ) { }
-    async login(loginDto: LoginDto): Promise<{ token: string }> {
+    async login(loginDto: LoginDto): Promise<{ token: string, user: Admin | User }> {
         let loggedUser: Admin | User | null;
         loggedUser = await this.adminService.findOneByEmail(loginDto.email);
         loggedUser ??= await this.userService.findOneByEmail(loginDto.email);
@@ -27,12 +27,14 @@ export class AuthService {
         const isMatch = await compare(loginDto.password, loggedUser.password);
         const payload = {
             id: loggedUser.id,
+            fullname: loggedUser.firstName + " " + loggedUser.lastName,
             email: loggedUser.email,
             role: loggedUser instanceof User ? loggedUser.role : UserRole.ADMIN
         };
         if (isMatch) {
             return {
                 token: this.jwtService.sign(payload),
+                user: loggedUser,
             };
         }
         throw new BadRequestException("Password incorrect");;
