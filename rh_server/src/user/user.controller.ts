@@ -7,6 +7,7 @@ import { UserRole } from '../enums/user_roles.enum';
 import { RolesGuard } from 'src/guards/roles.guard';
 import { JwtAuthGuard } from 'src/auth/guard/auth.guard';
 import { Roles } from 'src/decorators/roles.decorator';
+import { Pagination } from 'src/decorators/pagination.decorator';
 
 @Controller('user')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -32,9 +33,13 @@ export class UserController {
       optional: true,
       exceptionFactory: (error) => new BadRequestException(`role query must be ${UserRole}`)
     }))
-    role: UserRole
+    role: UserRole,
+    @Pagination() pagination: {
+      page?: number;
+      limit?: number;
+    }
   ) {
-    return this.userService.findAll(role);
+    return this.userService.findAll(role, pagination.page, pagination.limit);
   }
 
   @Get(':id')

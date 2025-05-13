@@ -8,6 +8,7 @@ import { hash } from 'bcrypt';
 import { UUID } from 'crypto';
 import { UserRole } from '../enums/user_roles.enum';
 import { Interval } from '@nestjs/schedule';
+import { buildPaginatedResponse, getPaginationParams } from 'src/utils/pagination.utils';
 
 @Injectable()
 export class UserService {
@@ -32,11 +33,17 @@ export class UserService {
     const newUser = await this.userRepo.create({ ...createUserDto, role: UserRole.EMPLOYER });
     return await this.userRepo.save(newUser);
   }
-  async findAll(role: UserRole): Promise<User[]> {
-    if (role) {
-      return await this.userRepo.findBy({ role });
-    }
-    return await this.userRepo.find();
+  async findAll(role: UserRole, p?: number, l?: number) {
+    const { skip, take, page, limit } = getPaginationParams(p, l);
+ 
+    const [users, total] = await this.userRepo.findAndCount({
+      where: {
+        ...(role && { role })
+      },
+      skip,
+      take
+    });
+    return buildPaginatedResponse(users, total, page, limit);
   }
 
   async findOne(id: UUID, role?: UserRole): Promise<User> {
