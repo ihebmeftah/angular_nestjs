@@ -1,0 +1,38 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private http = inject(HttpClient);
+
+  login(email: string, pwd: string) {
+    return this.http.post(environment.apiURL + '/auth/login', {
+      email: email,
+      password: pwd,
+    });
+  }
+  getLoggedUser() {
+    return this.http.get(environment.apiURL + '/auth/me');
+  }
+  register(registerdata: {
+    email: string,
+    firstName: string,
+    lastName: string,
+    password: string,
+  }) {
+    return this.http.post(environment.apiURL + '/auth/register', registerdata);
+  }
+
+  logout() {
+    localStorage.removeItem("token")
+  }
+  isLogged() {
+    let token = localStorage.getItem("token");
+    if (token)
+      return true;
+    return false
+  }
+}

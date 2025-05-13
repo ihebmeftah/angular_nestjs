@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { routes } from '../../app.routes';
+import { AuthService } from '../auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -10,18 +11,32 @@ import { routes } from '../../app.routes';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  private authS: AuthService = inject(AuthService);
+  private _router: Router = inject(Router);
   email?: string;
   password?: string;
-
-  constructor(private _router: Router) { }
-
   onLogin(form: any) {
     if (form.valid) {
-      console.log('Login Data:', {
-        email: this.email,
-        password: this.password
+      this.authS.login(this.email!, this.password!).subscribe({
+        next: (res: any) => {
+          localStorage.setItem("token", res["token"]);
+          this._router.navigate(['/']);
+          Swal.fire({
+            title: 'Login Successful',
+            text: 'Welcome back!',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          })
+        }
+        , error: (err) => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Please check your credentials.',
+            icon: 'error',
+            confirmButtonText: 'Retry'
+          })
+        }
       });
-      this._router.navigateByUrl('/home');
     }
   }
 
