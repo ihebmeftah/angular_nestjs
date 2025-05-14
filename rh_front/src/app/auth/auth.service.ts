@@ -30,9 +30,21 @@ export class AuthService {
     localStorage.removeItem("token")
   }
   isLogged() {
-    let token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token)
       return true;
     return false
+  }
+  currentUserRole() {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const payload = token.split('.')[1];
+      const decodedPayload = atob(payload);
+      const payloadJson = JSON.parse(decodedPayload);
+      const role = payloadJson["role"];
+      console.log(role);
+      return role;
+    }
+    return null;
   }
 }
