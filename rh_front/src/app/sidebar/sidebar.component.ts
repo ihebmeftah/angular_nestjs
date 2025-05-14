@@ -33,11 +33,9 @@ export class SidebarComponent {
           role: string,
           fullname: string
         };
-        console.log(this.user);
       },
       error: (err) => {
         this.authS.logout();
-        console.log("GET LOGGED USER ERROR" + err);
       }
     });
   }
