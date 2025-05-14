@@ -1,17 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { UsersService } from '../users.service';
 import { PaginatedResponse } from '../../models/paginationresponse';
 import { User } from '../../models/user';
-import { delay } from 'rxjs';
+import { UsersService } from '../users.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-list-user',
-  standalone: false,
-  templateUrl: './list-user.component.html',
-  styleUrl: './list-user.component.css'
+  selector: 'app-user-list',
+  imports: [RouterLink],
+  templateUrl: './user-list.component.html',
+  styleUrl: './user-list.component.css'
 })
-export class ListUserComponent {
-  users?: PaginatedResponse<User>
+export class UserListComponent {
+ users?: PaginatedResponse<User>
   usersService = inject(UsersService)
   page: number = 1;
   nbPages: number[] = [];

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-add-user',
-  standalone: false,
-  templateUrl: './add-user.component.html',
-  styleUrl: './add-user.component.css'
+  selector: 'app-user-add',
+  imports: [],
+  templateUrl: './user-add.component.html',
+  styleUrl: './user-add.component.css'
 })
-export class AddUserComponent {
+export class UserAddComponent {
   fname?: string;
   lname?: string;
   email?: string;

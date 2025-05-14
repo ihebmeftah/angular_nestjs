@@ -50,7 +50,24 @@ export const routes: Routes = [
   {
     path: 'users',
     canActivate: [needAuth],
-    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./users/user-list/user-list.component').then(m => m.UserListComponent)
+      },
+      {
+        path: 'add',
+        loadComponent: () => import('./users/user-add/user-add.component').then(m => m.UserAddComponent)
+      },
+      {
+        path: ':id',
+        loadComponent: () => import('./users/user-info/user-info.component').then(m => m.UserInfoComponent)
+      },
+      {
+        path: ':id/edit',
+        loadComponent: () => import('./users/user-edit/user-edit.component').then(m => m.UserEditComponent)
+      }
+    ]
   },
   {
     path: 'not-found',
