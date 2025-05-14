@@ -40,6 +40,9 @@ export class UserService {
       where: {
         ...(role && { role })
       },
+      order: {
+        createdAt: 'DESC'
+      },
       skip,
       take
     });

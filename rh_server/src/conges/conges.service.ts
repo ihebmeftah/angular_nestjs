@@ -40,6 +40,9 @@ export class CongesService {
             relations: {
                 user: true,
             },
+            order: {
+                createdAt: 'DESC'
+            },
             skip,
             take
         });
