@@ -1,11 +1,12 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCongeDto } from './dto/create-conge.dto';
-import { UpdateCongeDto } from './dto/update-conge.dto';
 import { Conge } from './entities/conge.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserService } from '../user/user.service';
 import { UUID } from 'crypto';
+import { buildPaginatedResponse, getPaginationParams } from 'src/utils/pagination.utils';
+import { CongeType } from 'src/enums/conge_type.enum';
 
 @Injectable()
 export class CongesService {
@@ -30,11 +31,36 @@ export class CongesService {
         return await this.congeRepo.save(conge);
     }
 
-    async findAll() {
-        return await this.congeRepo.find({
+    async findAll(type?: CongeType, p?: number, l?: number) {
+        const { skip, take, page, limit } = getPaginationParams(p, l);
+        const [conges, total] = await this.congeRepo.findAndCount({
+            where: {
+                ...(type && { congeType: type }),
+            },
             relations: {
                 user: true,
             },
+            skip,
+            take
         });
+        return buildPaginatedResponse(conges, total, page, limit);
+    }
+    private async findOneById(id: UUID) {
+        const conge = await this.congeRepo.findOne({ where: { id } });
+        if (!conge) {
+            throw new NotFoundException(`Conge with this id ${id} not found`)
+        }
+        return conge;
+    }
+    async acceptRequest(id: UUID) {
+        const conge = await this.findOneById(id)
+        await this.congeRepo.update(conge.id, { isAccepted: true });
+        return { message: "Conge accepted successfully" }
+    }
+
+    async rejectedRequest(id: UUID) {
+        const conge = await this.findOneById(id)
+        await this.congeRepo.update(conge.id, { isAccepted: false });
+        return { message: "Conge rejected successfully" }
     }
 }
