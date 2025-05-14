@@ -12,7 +12,31 @@
       </button> -->
     </div>
   </div>
-
+  @if (!users) {
+  }
+  @else if (users.totalItems === 0) {
+  <div class="empty-state-container">
+    <div class=" empty-state">
+      <div class="empty-state-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.5">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
+      <h3 class="empty-state-title">No Users Found</h3>
+      <p class="empty-state-description">
+        There are currently no users in the system. Start by adding a new user.
+      </p>
+      <button class="btn btn-primary" routerLink="/users/add">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14"></path>
+          <path d="M5 12h14"></path>
+        </svg>
+        Add New User
+      </button>
+    </div>
+  </div>
+  } @else {
   <table class="user-table">
     <thead>
       <tr>
@@ -24,13 +48,13 @@
       </tr>
     </thead>
     <tbody>
-      @for (user of users; track $index) {
+      @for (user of users.data; track $index) {
       <tr>
         <td>
           <div class="user-info">
             <img src="https://randomuser.me/api/portraits/women/44.jpg" class="user-avatar">
             <div>
-              <div class="user-name">{{user.name}}</div>
+              <div class="user-name">{{user.firstName + ' ' + user.lastName}}</div>
               <div class="user-email">{{user.email}}</div>
             </div>
           </div>
@@ -50,15 +74,14 @@
   </table>
 
   <div class="pagination">
-    <button class="page-btn disabled">❮</button>
-    <button class="page-btn active">1</button>
-    <button class="page-btn">2</button>
-    <button class="page-btn">3</button>
-    <button class="page-btn">❯</button>
-  </div>
-</div>
+    <button class="page-btn" [class.disabled]="this.page === 1" (click)="previousPage()">❮</button>
+    @for (nb of nbPages; track nb) {
+    <button class="page-btn" [class.active]="page === nb" (click)="onChangePage(nb)">{{nb}}</button> }
 
-<!-- Floating Action Button -->
-<button class="fab" routerLink="/users/add">
-  <span class="fab-icon">+</span>
-</button>
+    <button class="page-btn" [class.disabled]="!users.hasNext" (click)="nextPage()">❯</button>
+  </div>
+  <!-- Floating Action Button -->
+  <button class="fab" routerLink="/users/add">
+    <span class="fab-icon">+</span>
+  </button>
+  }

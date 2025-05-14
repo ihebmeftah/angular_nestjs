@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { UsersService } from '../users.service';
 import { ActivatedRoute } from '@angular/router';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-info-user',
@@ -10,13 +11,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class InfoUserComponent {
   private actRoute = inject(ActivatedRoute);
-  user?: { id: number, name: string, email: string, role: string[] };
+  user?: User;
   usersService = inject(UsersService)
 
   ngOnInit() {
-    console.log('Get user');
     const id = this.actRoute.snapshot.params['id'];
-    this.user = this.usersService.getUser(id);
-    console.log(this.user);
+    this.usersService.getUser(id).subscribe({
+      next: (resp: any) => {
+        this.user = resp;
+      },
+      error: (err) => {
+      }
+    });
   }
 }

@@ -6,11 +6,12 @@
     </h1>
   </div>
 
+  @if(user){
   <div class="user-profile-card">
     <div class="profile-header">
       <img src="https://randomuser.me/api/portraits/women/44.jpg" class="user-avatar-lg">
       <div class="user-meta">
-        <h2 class="user-name-lg">{{ user!.name }}</h2>
+        <h2 class="user-name-lg">{{ user!.firstName + ' ' + user!.lastName }}</h2>
         <span class="user-role-badge role-admin">Administrator</span>
         <div class="user-email-lg">
           ✉️ {{ user!.email }}
@@ -76,15 +77,19 @@
       <div class="details-grid">
         <div class="detail-item">
           <div class="detail-label">User Role</div>
-          <div class="detail-value">{{ user!.role }}</div>
+          <div class="detail-value">{{ user!.role | uppercase }}</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Conge limit</div>
+          <div class="detail-value">{{ user!.congeNb}}</div>
         </div>
         <div class="detail-item">
           <div class="detail-label">Last Login</div>
-          <div class="detail-value">Today, 9:42 AM</div>
+          <div class="detail-value">{{user!.createdAt | date}}</div>
         </div>
         <div class="detail-item">
           <div class="detail-label">Account Status</div>
-          <div class="detail-value">Active</div>
+          <div class="detail-value">{{ user!.active ? 'Active' : 'Inactive' }}</div>
         </div>
       </div>
     </div>
@@ -120,4 +125,5 @@
       </div>
     </div>
   </div>
+  }
 </div>
