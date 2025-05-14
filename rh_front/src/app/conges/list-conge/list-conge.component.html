@@ -8,12 +8,12 @@
       <div class="filter-controls">
         <div class="filter-group">
           <label>Leave Type:</label>
-          <select class="form-control">
+          <select [ngModel]="filterType" class="form-control" (ngModelChange)="onOptionChange($event)">
             <option value="">All Types</option>
-            <option value="vacation">Maladie</option>
-            <option value="sick">Formation</option>
-            <option value="maternity">Sante</option>
-            <option value="paternity">Vacances</option>
+            <option value='conge_maladie'>Maladie</option>
+            <option value='conge_de_formation'>Formation</option>
+            <option value='conge_de_sante'>Sante</option>
+            <option value='conge_de_vacances'>Vacances</option>
           </select>
         </div>
 
@@ -33,7 +33,9 @@
       </div>
     </div>
   </div>
-
+  @if(conges === undefined) {
+  <app-loading></app-loading>
+  }@else if (conges!.totalItems > 0 ) {
   <table class="user-table">
     <thead>
       <tr>
@@ -46,41 +48,42 @@
       </tr>
     </thead>
     <tbody>
-      @for (conge of conges; track $index) {
+      @for (conge of conges.data; track $index) {
       <tr>
         <td>
           <div class="user-info">
-            <img [src]="conge.user.avatar" class="user-avatar">
+            <img [src]="conge.user.photo ? conge.user.photo : 'https://www.gravatar.com/avatar/?d=mp'"
+              class="user-avatar" alt="User Avatar">
             <div>
-              <div class="user-name">{{conge.user.name}}</div>
+              <div class="user-name">{{conge.user.firstName + ' ' + conge.user.lastName}}</div>
               <div class="user-email">{{conge.user.email}}</div>
             </div>
           </div>
         </td>
         <td>
           <span>
-            @switch (conge.type) {
-            @case ("conge_maladie") {<span>conge_maladie</span>}
-            @case ("conge_de_formation") {<span>conge_de_formation</span>}
-            @case ("conge_de_sante") {<span>conge_de_sante</span>}
-            @case ("conge_de_vacances") {<span>Parental Leave</span>}
+            @switch (conge.congeType) {
+            @case ("conge_maladie") {<span>Maladie</span>}
+            @case ("conge_de_formation") {<span>Formation</span>}
+            @case ("conge_de_sante") {<span>Sante</span>}
+            @case ("conge_de_vacances") {<span>Vacances</span>}
 
             }
           </span>
         </td>
-        <td>{{conge.startDate}}</td>
-        <td>{{conge.endDate}}</td>
+        <td>{{conge.start | date}}</td>
+        <td>{{conge.end| date}}</td>
         <td>
           <span class="status-badge" [ngClass]="{
-              'status-active': conge.status === 'approved',
-              'status-inactive': conge.status === 'rejected',
-              'status-pending': conge.status === 'pending'
+              'status-active': conge.isAccepted,
+              'status-inactive': !conge.isAccepted,
+              'status-pending': conge.isAccepted === null
             }">
-            {{conge.status}}
+            {{conge.isAccepted === null ? 'Pending' : !conge.isAccepted ? 'Rejected' : 'Approved'}}
           </span>
         </td>
         <td>
-          @if (conge.status === 'pending') {
+          @if (conge.isAccepted == null) {
           <button class="action-btn approve-btn" title="Approve">✓</button>
           <button class="action-btn reject-btn" title="Reject">✗</button>
           }
@@ -92,15 +95,18 @@
   </table>
 
   <div class="pagination">
-    <button class="page-btn disabled">❮</button>
-    <button class="page-btn active">1</button>
-    <button class="page-btn">2</button>
-    <button class="page-btn">3</button>
-    <button class="page-btn">❯</button>
-  </div>
-</div>
+    <button class="page-btn" [class.disabled]="this.page === 1" (click)="previousPage()">❮</button>
+    @for (nb of nbPages; track nb) {
+    <button class="page-btn" [class.active]="page === nb" (click)="onChangePage(nb)">{{nb}}</button> }
 
-<!-- Floating Action Button -->
-<button class="fab" routerLink="/conges/add">
-  <span class="fab-icon">+</span>
-</button>
+    <button class="page-btn" [class.disabled]="!conges!.hasNext" (click)="nextPage()">❯</button>
+  </div>
+  }@else {
+  <app-empty>
+  </app-empty>
+  }
+
+  <!-- Floating Action Button -->
+  <button class="fab" routerLink="/conges/add">
+    <span class="fab-icon">+</span>
+  </button>
