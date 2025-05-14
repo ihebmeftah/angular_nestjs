@@ -7,7 +7,7 @@
     </h1>
   </div>
 
-  <form class="form-container" id="addUserForm">
+  <form class="form-container" id="addUserForm" #adduserform="ngForm" (ngSubmit)="createRh(adduserform)">
     <!-- Basic Information Section -->
     <div class="form-section">
       <div class="section-header">
@@ -32,28 +32,25 @@
       <div class="form-grid">
         <div class="form-group">
           <label for="firstName">First Name *</label>
-          <input type="text" id="firstName" class="form-control" required>
-          <div class="error-message" id="firstNameError">Please enter a valid first name</div>
+          <input type="text" id="firstName" class="form-control" required [(ngModel)]="firstName" name="firstName">
         </div>
 
         <div class="form-group">
           <label for="lastName">Last Name *</label>
-          <input type="text" id="lastName" class="form-control" required>
-          <div class="error-message" id="lastNameError">Please enter a valid last name</div>
+          <input type="text" id="lastName" class="form-control" required [(ngModel)]="lastName" name="lastName">
         </div>
 
         <div class="form-group">
           <label for="email">Email Address *</label>
-          <input type="email" id="email" class="form-control" required>
-          <div class="error-message" id="emailError">Please enter a valid email address</div>
+          <input type="email" id="email" class="form-control" required [(ngModel)]="email" name="email">
         </div>
 
         <div class="form-group">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" class="form-control">
-          <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+          <input type="tel" id="phone" class="form-control" [(ngModel)]="phone" name="phone">
         </div>
 
+        <!--
         <div class="form-group select-wrapper">
           <label for="role">User Role *</label>
           <select id="role" class="form-control" required>
@@ -62,23 +59,21 @@
             <option value="rh">RH</option>
             <option value="employer">Employer</option>
           </select>
-          <div class="error-message" id="roleError">Please select a role</div>
         </div>
-
+-->
 
       </div>
 
       <div class="form-grid">
         <div class="form-group">
           <label for="password">Password *</label>
-          <input type="password" id="password" class="form-control" required>
-          <div class="error-message" id="passwordError">Password must be at least 8 characters</div>
+          <input type="password" id="password" class="form-control" required [(ngModel)]="password" name="password">
         </div>
 
         <div class="form-group">
           <label for="confirmPassword">Confirm Password *</label>
-          <input type="password" id="confirmPassword" class="form-control" required>
-          <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+          <input type="password" id="confirmPassword" class="form-control" required [(ngModel)]="cpassword"
+            name="cpassword">
         </div>
       </div>
     </div>

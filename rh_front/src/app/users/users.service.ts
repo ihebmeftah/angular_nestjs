@@ -12,7 +12,25 @@ export class UsersService {
     return this.http.get(`http://localhost:3000/api/v1/user?page=${page}&limit=5`);
   }
 
-  getUser(id: number){
+  getUser(id: number) {
     return this.http.get(`http://localhost:3000/api/v1/user/${id}`);
+  }
+
+  createEmployer(data: {
+    email: string
+    firstName: string,
+    lastName: string,
+    password: string
+  }) {
+    return this.http.post(`http://localhost:3000/api/v1/user/employer`, data);
+  }
+
+  createRh(data: {
+    email: string
+    firstName: string,
+    lastName: string,
+    password: string
+  }) {
+    return this.http.post(`http://localhost:3000/api/v1/user/rh`, data);
   }
 }
