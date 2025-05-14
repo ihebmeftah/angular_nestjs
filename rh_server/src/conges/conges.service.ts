@@ -25,7 +25,6 @@ export class CongesService {
         const conge = this.congeRepo.create({
             ...createCongeDto,
             user,
-            isAccepted: false,
         });
         this.userService.decrementCongeNb(userId);
         return await this.congeRepo.save(conge);
@@ -33,7 +32,9 @@ export class CongesService {
 
     async findAll() {
         return await this.congeRepo.find({
-            loadRelationIds: true,
+            relations: {
+                user: true,
+            },
         });
     }
 }

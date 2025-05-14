@@ -16,6 +16,6 @@ export class Conge extends TimestampBaseEntity {
     end: Date;
     @ManyToOne(() => User, { onDelete: 'CASCADE' })
     user: User;
-    @Column({ default: false })
+    @Column({ default: null, nullable: true })
     isAccepted: boolean;
 }
