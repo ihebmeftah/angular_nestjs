@@ -43,7 +43,7 @@
         <th>User</th>
         <th>Role</th>
         <th>Status</th>
-        <th>Last Active</th>
+        <th>Joined</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -59,9 +59,9 @@
             </div>
           </div>
         </td>
-        <td>{{user.role}}</td>
-        <td><span class="status-badge status-active">Active</span></td>
-        <td>2 hours ago</td>
+        <td>{{user.role | uppercase }}</td>
+        <td><span class="status-badge status-active">{{user.active ? 'Active' : 'Inactive'}}</span></td>
+        <td>{{user.createdAt | date}}</td>
         <td>
           <button class="action-btn" title="Edit" routerLink="/users/{{user.id}}/update">✏️</button>
           <button class="action-btn" title="View" routerLink="/users/{{user.id}}">👁️</button>

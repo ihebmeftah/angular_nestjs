@@ -3,15 +3,16 @@ import { PaginatedResponse } from '../../models/paginationresponse';
 import { User } from '../../models/user';
 import { UsersService } from '../users.service';
 import { RouterLink } from '@angular/router';
+import { DatePipe, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-list',
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe, UpperCasePipe],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
 export class UserListComponent {
- users?: PaginatedResponse<User>
+  users?: PaginatedResponse<User>
   usersService = inject(UsersService)
   page: number = 1;
   nbPages: number[] = [];
