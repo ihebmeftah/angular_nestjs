@@ -64,7 +64,7 @@ export const routes: Routes = [
         loadComponent: () => import('./users/user-info/user-info.component').then(m => m.UserInfoComponent)
       },
       {
-        path: ':id/edit',
+        path: ':id/update',
         loadComponent: () => import('./users/user-edit/user-edit.component').then(m => m.UserEditComponent)
       }
     ]
