@@ -7,7 +7,7 @@
     </h1>
   </div>
 
-  <form class="form-container" id="addUserForm" #adduserform="ngForm">
+  <form class="form-container" id="addUserForm" #adduserform="ngForm" (ngSubmit)="onSubmit(adduserform)">
     <!-- Basic Information Section -->
     <div class="form-section">
       <div class="section-header">
@@ -20,110 +20,80 @@
 
       <div class="avatar-upload">
         <div class="avatar-preview">
+          @if (!avatarPreview) {
           <div class="avatar-placeholder">👤</div>
-          <!-- <img src="preview.jpg" id="avatarPreview"> -->
+          }
+          @if(avatarPreview){
+          <img [src]="avatarPreview" id="avatarPreview"
+            style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover;" />
+          }
         </div>
         <label class="upload-btn">
           Upload Photo
-          <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+          <input type="file" id="avatarUpload" accept="image/*" style="display: none;" (change)="onFileSelected($event)"
+            name="photo">
         </label>
       </div>
 
       <div class="form-grid">
         <div class="form-group">
           <label for="firstName">First Name *</label>
-          <input type="text" id="firstName" class="form-control" required>
+          <input type="text" id="firstName" class="form-control" required name="firstName" [(ngModel)]="user.firstName"
+            #firstName="ngModel">
+          @if(firstName.invalid && firstName.touched){
+          <div class="text-danger">First name is required.</div>
+          }
         </div>
 
         <div class="form-group">
           <label for="lastName">Last Name *</label>
-          <input type="text" id="lastName" class="form-control" required>
+          <input type="text" id="lastName" class="form-control" required name="lastName" [(ngModel)]="user.lastName"
+            #lastName="ngModel">
+          @if(lastName.invalid && lastName.touched) {
+          <div class="text-danger">Last name is required.</div>
+          }
         </div>
 
         <div class="form-group">
           <label for="email">Email Address *</label>
-          <input type="email" id="email" class="form-control" required>
+          <input type="email" id="email" class="form-control" required name="email" [(ngModel)]="user.email"
+            #email="ngModel">
+          @if(email.invalid && email.touched){
+          <div class="text-danger">Valid email is required.</div>
+          }
         </div>
 
         <div class="form-group">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" class="form-control">
+          <input type="tel" id="phone" class="form-control" name="phone" [(ngModel)]="user.phone">
         </div>
-
-        <!--
-        <div class="form-group select-wrapper">
-          <label for="role">User Role *</label>
-          <select id="role" class="form-control" required>
-            <option value="">Select a role</option>
-            <option value="admin">Administrator</option>
-            <option value="rh">RH</option>
-            <option value="employer">Employer</option>
-          </select>
-        </div>
--->
-
       </div>
 
       <div class="form-grid">
         <div class="form-group">
           <label for="password">Password *</label>
-          <input type="password" id="password" class="form-control" required>
+          <input type="password" id="password" class="form-control" required name="password" [(ngModel)]="user.password"
+            #password="ngModel">
+          @if (password.invalid && password.touched) {
+          <div class="text-danger">Password is required.</div>
+
+          }
         </div>
 
         <div class="form-group">
           <label for="confirmPassword">Confirm Password *</label>
-          <input type="password" id="confirmPassword" class="form-control" required>
+          <input type="password" id="confirmPassword" class="form-control" required name="confirmPassword"
+            [(ngModel)]="user.confirmPassword" #confirmPassword="ngModel">
+          @if (confirmPassword.invalid && confirmPassword.touched) {
+          <div class="text-danger">Confirmation is required.
+          </div>
+          }
+          @if(user.password && user.confirmPassword && user.password !== user.confirmPassword){
+          <div class="text-danger">Passwords do not match.</div>
+          }
         </div>
       </div>
     </div>
-
-    <!-- Account Settings Section -->
-    <!--     <div class="form-section">
-      <div class="section-header">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-        </svg>
-        Account Settings
-      </div>
-
-
-    </div>
- -->
-    <!-- Additional Information Section -->
-    <!--     <div class="section-header">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10"></circle>
-        <line x1="12" y1="8" x2="12" y2="12"></line>
-        <line x1="12" y1="16" x2="12.01" y2="16"></line>
-      </svg>
-      Additional Information
-    </div>
-
-    <div class="form-grid">
-      <div class="form-group select-wrapper">
-        <label for="department">Department</label>
-        <select id="department" class="form-control">
-          <option value="">Select department</option>
-          <option value="marketing">Marketing</option>
-          <option value="sales">Sales</option>
-          <option value="it">IT</option>
-          <option value="hr">Human Resources</option>
-          <option value="finance">Finance</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="jobTitle">Job Title</label>
-        <input type="text" id="jobTitle" class="form-control">
-      </div>
-
-      <div class="form-group">
-        <label for="startDate">Start Date</label>
-        <input type="date" id="startDate" class="form-control">
-      </div>
-    </div>
- -->
-
 
     <!-- Form Actions -->
     <div class="form-actions">
