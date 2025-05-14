@@ -12,7 +12,8 @@
       </button> -->
     </div>
   </div>
-  @if (!users) {
+  @if (users === undefined) {
+  <app-loading></app-loading>
   }
   @else if (users.totalItems === 0) {
   <div class="empty-state-container">

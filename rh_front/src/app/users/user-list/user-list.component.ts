@@ -4,10 +4,11 @@ import { User } from '../../models/user';
 import { UsersService } from '../users.service';
 import { RouterLink } from '@angular/router';
 import { DatePipe, UpperCasePipe } from '@angular/common';
+import { LoadingComponent } from "../../common/loading/loading.component";
 
 @Component({
   selector: 'app-user-list',
-  imports: [RouterLink, DatePipe, UpperCasePipe],
+  imports: [RouterLink, DatePipe, UpperCasePipe, LoadingComponent],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
@@ -42,8 +43,6 @@ export class UserListComponent {
   }
 
   getUsers() {
-
-
     this.usersService.getUsers(this.page)
       .subscribe({
         next: (response: any) => {

@@ -7,7 +7,7 @@
     </h1>
   </div>
 
-  <form class="form-container" id="addUserForm" #adduserform="ngForm" (ngSubmit)="createRh(adduserform)">
+  <form class="form-container" id="addUserForm" #adduserform="ngForm">
     <!-- Basic Information Section -->
     <div class="form-section">
       <div class="section-header">
@@ -32,22 +32,22 @@
       <div class="form-grid">
         <div class="form-group">
           <label for="firstName">First Name *</label>
-          <input type="text" id="firstName" class="form-control" required [(ngModel)]="firstName" name="firstName">
+          <input type="text" id="firstName" class="form-control" required>
         </div>
 
         <div class="form-group">
           <label for="lastName">Last Name *</label>
-          <input type="text" id="lastName" class="form-control" required [(ngModel)]="lastName" name="lastName">
+          <input type="text" id="lastName" class="form-control" required>
         </div>
 
         <div class="form-group">
           <label for="email">Email Address *</label>
-          <input type="email" id="email" class="form-control" required [(ngModel)]="email" name="email">
+          <input type="email" id="email" class="form-control" required>
         </div>
 
         <div class="form-group">
           <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" class="form-control" [(ngModel)]="phone" name="phone">
+          <input type="tel" id="phone" class="form-control">
         </div>
 
         <!--
@@ -67,13 +67,12 @@
       <div class="form-grid">
         <div class="form-group">
           <label for="password">Password *</label>
-          <input type="password" id="password" class="form-control" required [(ngModel)]="password" name="password">
+          <input type="password" id="password" class="form-control" required>
         </div>
 
         <div class="form-group">
           <label for="confirmPassword">Confirm Password *</label>
-          <input type="password" id="confirmPassword" class="form-control" required [(ngModel)]="cpassword"
-            name="cpassword">
+          <input type="password" id="confirmPassword" class="form-control" required>
         </div>
       </div>
     </div>

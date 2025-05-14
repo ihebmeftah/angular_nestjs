@@ -2,8 +2,6 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UsersService } from '../users.service';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-add',
@@ -22,17 +20,8 @@ export class UserAddComponent {
   email?: string;
   password?: string;
   cpassword?: string;
-  phone?: string;
-  createRh(f: any) {
-    if (f.valid) {
-      console.log({
-        firstName: this.firstName,
-        lastName: this.lastName,
-        email: this.email,
-        password: this.password,
-        cpassword: this.cpassword,
-        phone: this.phone
-      })
+  createRh() {
+    if (this.password === this.cpassword) {
       this.userS.createRh({
         firstName: this.firstName!,
         lastName: this.lastName!,
@@ -40,30 +29,10 @@ export class UserAddComponent {
         password: this.password!
       }).subscribe({
         next: (res: any) => {
-          Swal.fire({
-            title: 'Success!',
-            text: 'User created successfully.',
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          })
           this.router.navigate(['/users']);
         },
-        error: (err: HttpErrorResponse) => {
-          if (err.status === 409) {
-            Swal.fire({
-              title: 'Error!',
-              text: 'Email already exists.',
-              icon: 'error',
-              confirmButtonText: 'Retry'
-            })
-            return
-          }
-          Swal.fire({
-            title: 'Error!',
-            text: 'An error occurred while creating the user.',
-            icon: 'error',
-            confirmButtonText: 'Retry'
-          })
+        error: (err) => {
+          console.error(err);
         }
       });
     } else {
