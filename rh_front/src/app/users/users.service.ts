@@ -1,23 +1,18 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  users: { id: number, name: string, email: string, role: string[] }[] = [
-    { id: 1, name: 'John Doe', email: 'Bv5hP@example.com', role: ['Admin'] },
-    { id: 2, name: 'Jane Smith', email: 'jane.smith@rh.com', role: ['Employer'] },
-    { id: 3, name: 'Bob Johnson', email: 'bob.johnson@rh.com', role: ['Rh'] },
-    { id: 4, name: 'Alice Brown', email: 'alice.brown@rh.com', role: ["Rh", "Employer"] },
-    { id: 5, name: 'Charlie Davis', email: 'charlie.davis@rh.com', role: ["Admin", "Employer"] },
-    { id: 6, name: 'Eve White', email: 'eve.white@rh.com', role: ["Admin", "Rh"] },
-  ]
+  private http = inject(HttpClient);
+
   constructor() { }
-  getUsers(): { id: number, name: string, email: string, role: string[] }[] {
-    return this.users;
+  getUsers(page: number) {
+    return this.http.get(`http://localhost:3000/api/v1/user?page=${page}&limit=5`);
   }
 
-  getUser(id: number): { id: number, name: string, email: string, role: string[] } | undefined {
-    return this.users.find(user => user.id === Number(id));
+  getUser(id: number){
+    return this.http.get(`http://localhost:3000/api/v1/user/${id}`);
   }
 }

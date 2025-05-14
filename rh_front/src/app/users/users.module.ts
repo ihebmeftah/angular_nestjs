@@ -6,6 +6,7 @@ import { InfoUserComponent } from './info-user/info-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { USERS_ROUTING } from './users.routing';
 import { UsersComponent } from './users/users.component';
+import { LoadingComponent } from "../common/loading/loading.component";
 
 
 
@@ -20,6 +21,7 @@ import { UsersComponent } from './users/users.component';
   imports: [
     CommonModule,
     USERS_ROUTING,
+    LoadingComponent,
   ]
 })
 export class UsersModule { }
