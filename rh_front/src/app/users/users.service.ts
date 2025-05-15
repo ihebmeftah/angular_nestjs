@@ -33,5 +33,7 @@ export class UsersService {
   }) {
     return this.http.post(`http://localhost:3000/api/v1/user/rh`, data);
   }
-
+  deleteUser(id: string) {
+    return this.http.delete(`http://localhost:3000/api/v1/user/${id}`);
+  }
 }

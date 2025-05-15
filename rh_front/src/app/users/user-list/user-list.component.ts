@@ -5,6 +5,7 @@ import { UsersService } from '../users.service';
 import { RouterLink } from '@angular/router';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { LoadingComponent } from "../../common/loading/loading.component";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-list',
@@ -51,6 +52,25 @@ export class UserListComponent {
         },
         error: (error) => {
           console.error('Error fetching users:', error);
+        }
+      });
+  }
+
+  deleteUser(id: string) {
+    this.usersService.deleteUser(id)
+      .subscribe({
+        next: (response: any) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'User deleted successfully',
+            text: 'User has been deleted successfully',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.getUsers()
+        },
+        error: (error) => {
+          console.error('Error deleting user:', error);
         }
       });
   }

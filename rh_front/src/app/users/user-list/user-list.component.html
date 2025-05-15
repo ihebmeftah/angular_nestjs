@@ -64,9 +64,8 @@
         <td><span class="status-badge status-active">{{user.active ? 'Active' : 'Inactive'}}</span></td>
         <td>{{user.createdAt | date}}</td>
         <td>
-          <button class="action-btn" title="Edit" routerLink="/users/{{user.id}}/update">✏️</button>
           <button class="action-btn" title="View" routerLink="/users/{{user.id}}">👁️</button>
-          <button class="action-btn" title="Delete">🗑️</button>
+          <button class="action-btn" title="Delete" (click)="deleteUser(user.id)">🗑️</button>
         </td>
       </tr>
       }
