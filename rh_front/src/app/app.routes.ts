@@ -4,6 +4,30 @@ import { needAuth, guestGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
+    path: "evaluation",
+    canActivate: [needAuth],
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./evaluation/show-evaluation/show-evaluation.component').then(m => m.ShowEvaluationComponent)
+      },
+    ]
+  },
+  {
+    path: 'timetables',
+    canActivate: [needAuth],
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./timetables/show-timetable/show-timetable.component').then(m => m.ShowTimetableComponent)
+      },
+      {
+        path: 'calendar',
+        loadComponent: () => import('./timetables/calendar-timetable/calendar-timetable.component').then(m => m.CalendarTimetableComponent)
+      },
+    ]
+  },
+  {
     path: 'auth',
     canActivate: [guestGuard],
     children: [
