@@ -64,7 +64,7 @@ export class UserAddComponent {
           title: 'Success!',
           text: 'User created successfully',
           icon: 'success',
-          confirmButtonText: 'Retry'
+          confirmButtonText: 'Ok'
         })
         this.router.navigate(['/users']);
       },
