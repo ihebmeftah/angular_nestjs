@@ -8,7 +8,7 @@
       <div class="filter-controls">
         <div class="filter-group">
           <label>Leave Type:</label>
-          <select [ngModel]="filterType" class="form-control" (ngModelChange)="onOptionChange($event)">
+          <select [ngModel]="filterType" class="form-control" (ngModelChange)="onFilterTypeChange($event)">
             <option value="">All Types</option>
             <option value='conge_maladie'>Maladie</option>
             <option value='conge_de_formation'>Formation</option>
@@ -18,18 +18,14 @@
         </div>
 
         <div class="filter-group">
-          <label>From:</label>
-          <input type="date" class="form-control">
+          <label>Stauts:</label>
+          <select [ngModel]="filterStatus" class="form-control" (ngModelChange)="onFilterStatusChange($event)">
+            <option value="">All Types</option>
+            <option value='accepted'>Accepted</option>
+            <option value='rejected'>Rejected</option>
+            <option value='pending'>pending</option>
+          </select>
         </div>
-
-        <div class="filter-group">
-          <label>To:</label>
-          <input type="date" class="form-control">
-        </div>
-
-        <button class="btn btn-secondary">
-          Reset Filters
-        </button>
       </div>
     </div>
   </div>

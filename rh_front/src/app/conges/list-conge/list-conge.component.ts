@@ -25,10 +25,13 @@ export class ListCongeComponent {
   nbPages: number[] = [];
 
   filterType: string = "";
+  filterStatus: string = "";
+  onFilterStatusChange(value: string) {
+    this.filterStatus = value;
+  }
 
-  onOptionChange(value: string) {
+  onFilterTypeChange(value: string) {
     this.filterType = value;
-    console.log(this.filterType);
     this.getConges();
   }
 
