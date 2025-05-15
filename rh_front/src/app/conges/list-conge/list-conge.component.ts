@@ -9,6 +9,7 @@ import { LoadingComponent } from "../../common/loading/loading.component";
 import { EmptyComponent } from "../../common/empty/empty.component";
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-conge',
@@ -58,10 +59,55 @@ export class ListCongeComponent {
       next: (data: any) => {
         this.conges = data;
         this.nbPages = Array.from({ length: this.conges!.totalPages }, (_, i) => i + 1)
-
       },
       error: (error) => {
         console.error('Error fetching conges:', error);
+      }
+    });
+  }
+
+  accepteConge(id: string) {
+    this.congesS.accepteConge(id).subscribe({
+      next: (data: any) => {
+        this.conges?.data.forEach((conge) => {
+          if (conge.id === id) {
+            conge.isAccepted = true;
+          }
+        }
+        );
+        Swal.fire({
+          icon: 'success',
+          title: 'Congé accepté',
+          text: 'Le congé a été accepté avec succès.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      },
+      error: (error) => {
+        console.error('Error accepting conge:', error);
+      }
+    });
+  }
+
+  rejectConge(id: string) {
+    this.congesS.rejectConge(id).subscribe({
+      next: (data: any) => {
+        this.conges?.data.forEach((conge) => {
+          if (conge.id === id) {
+            conge.isAccepted = false;
+          }
+        }
+        );
+        Swal.fire({
+          icon: 'success',
+          title: 'Congé accepté',
+          text: 'Le congé a été accepté avec succès.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      },
+      error: (error) => {
+        console.error('Error accepting conge:', error);
       }
     });
   }

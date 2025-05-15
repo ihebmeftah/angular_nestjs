@@ -84,8 +84,8 @@
         </td>
         @if (authS.currentUserRole() === "rh"){ <td>
           @if (conge.isAccepted == null) {
-          <button class="action-btn approve-btn" title="Approve">✓</button>
-          <button class="action-btn reject-btn" title="Reject">✗</button>
+          <button class="action-btn approve-btn" title="Approve" (click)="accepteConge(conge.id)">✓</button>
+          <button class="action-btn reject-btn" title="Reject" (click)="rejectConge(conge.id)">✗</button>
           }
         </td>}
       </tr>
