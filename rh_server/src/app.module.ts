@@ -8,6 +8,7 @@ import { AdminModule } from './admin/admin.module';
 import { TimetablesModule } from './timetables/timetables.module';
 import { CongesModule } from './conges/conges.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { EvaluationsModule } from './evaluations/evaluations.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     AdminModule,
     TimetablesModule,
     CongesModule,
+    EvaluationsModule,
   ],
   controllers: [],
   providers: [],
