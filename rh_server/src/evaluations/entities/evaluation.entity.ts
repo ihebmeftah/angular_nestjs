@@ -12,6 +12,6 @@ export class Evaluation {
     feedback: string
     @ManyToOne(() => User, { onDelete: "CASCADE" })
     user: User
-    @Column({ unique: true })
+    @Column()
     day: string
 }
