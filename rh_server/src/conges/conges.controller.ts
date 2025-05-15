@@ -26,11 +26,16 @@ export class CongesController {
 
   @Get()
   async getAllConges(
+    @Req() req: any,
     @Query('type', new ParseEnumPipe(CongeType, { optional: true }),) type: CongeType,
     @Pagination() pagination: {
       page?: number;
       limit?: number;
     }) {
+    if (req.user.role === UserRole.EMPLOYER) {
+      return this.congesService.findAllOfEmployer(req.user.id, type, pagination.page, pagination.limit);
+
+    }
     return this.congesService.findAll(type, pagination.page, pagination.limit);
   }
 

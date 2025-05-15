@@ -30,7 +30,26 @@ export class CongesService {
         this.userService.decrementCongeNb(userId);
         return await this.congeRepo.save(conge);
     }
-
+    async findAllOfEmployer(id: UUID, type?: CongeType, p?: number, l?: number) {
+        const { skip, take, page, limit } = getPaginationParams(p, l);
+        const [conges, total] = await this.congeRepo.findAndCount({
+            where: {
+                ...(type && { congeType: type }),
+                user: {
+                    id
+                }
+            },
+            relations: {
+                user: true,
+            },
+            order: {
+                createdAt: 'DESC'
+            },
+            skip,
+            take
+        });
+        return buildPaginatedResponse(conges, total, page, limit);
+    }
     async findAll(type?: CongeType, p?: number, l?: number) {
         const { skip, take, page, limit } = getPaginationParams(p, l);
         const [conges, total] = await this.congeRepo.findAndCount({
