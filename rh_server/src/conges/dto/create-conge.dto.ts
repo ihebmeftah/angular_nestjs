@@ -1,4 +1,4 @@
-import { IsDateString, IsEnum, IsNotEmpty } from "class-validator";
+import { IsDateString, IsEnum, IsNotEmpty, IsString } from "class-validator";
 import { CongeType } from "src/enums/conge_type.enum";
 
 export class CreateCongeDto {
@@ -14,4 +14,8 @@ export class CreateCongeDto {
     @IsDateString()
     @IsNotEmpty()
     end: Date;
+
+    @IsNotEmpty()
+    @IsString()
+    reason: string;
 }

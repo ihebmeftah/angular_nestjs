@@ -11,6 +11,8 @@ export class Conge extends TimestampBaseEntity {
     @Column()
     congeType: CongeType;
     @Column()
+    reason: string;
+    @Column()
     start: Date;
     @Column()
     end: Date;
