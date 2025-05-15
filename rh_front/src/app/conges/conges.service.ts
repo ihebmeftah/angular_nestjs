@@ -16,6 +16,15 @@ export class CongesService {
     return this.http.get(link);
   }
 
+  requestConge(data: {
+    congeType: string,
+    start: string,
+    end: string,
+    reason: string
+  }) {
+    return this.http.post("http://localhost:3000/api/v1/conges/request", data);
+  }
+
   accepteConge(id: string) {
     return this.http.patch(`http://localhost:3000/api/v1/conges/${id}/accepted`, {});
   }

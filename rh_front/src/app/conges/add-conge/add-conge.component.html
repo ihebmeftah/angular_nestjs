@@ -7,7 +7,7 @@
     </h1>
   </div>
 
-  <form class="form-container" id="addCongeForm">
+  <form class="form-container" id="addCongeForm" #addCongeForm="ngForm" (ngSubmit)="onSubmit(addCongeForm)">
     <!-- Leave Information Section -->
     <div class="form-section">
       <div class="section-header">
@@ -23,33 +23,47 @@
       <div class="form-grid">
         <div class="form-group select-wrapper">
           <label for="leaveType">Leave Type *</label>
-          <select id="leaveType" class="form-control" required>
+          <select id="leaveType" class="form-control" name="leaveType" [(ngModel)]="leaveType" required
+            #leaveTypeModel="ngModel">
             <option value="">Select leave type</option>
-            <option value="vacation">Maladie</option>
-            <option value="sick">Formation</option>
-            <option value="maternity">Sante</option>
-            <option value="paternity">Vacances</option>
+            <option value='conge_maladie'>Maladie</option>
+            <option value='conge_de_formation'>Formation</option>
+            <option value='conge_de_sante'>Sante</option>
+            <option value='conge_de_vacances'>Vacances</option>
           </select>
+          @if(leaveTypeModel.invalid && leaveTypeModel.touched){
+          <div class="text-danger">Leave type is required.</div>
+          }
         </div>
 
         <div class="form-group">
           <label for="startDate">Start Date *</label>
-          <input type="date" id="startDate" class="form-control" required>
+          <input type="date" id="startDate" class="form-control" name="startDate" [(ngModel)]="startDate" required
+            #startDateModel="ngModel">
+          @if(startDateModel.invalid && startDateModel.touched){
+          <div class="text-danger">Start date is required.</div>
+          }
         </div>
 
         <div class="form-group">
           <label for="endDate">End Date *</label>
-          <input type="date" id="endDate" class="form-control" required>
+          <input type="date" id="endDate" class="form-control" name="endDate" [(ngModel)]="endDate" required
+            #endDateModel="ngModel">
+          @if(endDateModel.invalid && endDateModel.touched){
+          <div class="text-danger">End date is required.</div>
+          }
         </div>
       </div>
 
       <div class="form-group">
         <label for="reason">Reason *</label>
-        <textarea id="reason" class="form-control" rows="4" required></textarea>
+        <textarea id="reason" class="form-control" rows="4" name="reason" [(ngModel)]="reason" required
+          #reasonModel="ngModel"></textarea>
+        @if(reasonModel.invalid && reasonModel.touched){
+        <div class="text-danger">Reason is required.</div>
+        }
       </div>
     </div>
-
-
 
     <!-- Documents Section -->
     <div class="form-section">
@@ -70,25 +84,27 @@
             <line x1="12" y1="3" x2="12" y2="15"></line>
           </svg>
           Upload Document
-          <input type="file" id="documentUpload" style="display: none;" multiple>
+          <input type="file" id="documentUpload" style="display: none;" multiple (change)="onFileChange($event)">
         </label>
       </div>
 
       <div id="documentPreview" style="margin-top: 15px;">
-        <!-- Document previews will appear here -->
+        @for(file of documentNames; track file){
+        <div>{{ file }}</div>
+        }
       </div>
     </div>
 
     <!-- Form Actions -->
     <div class="form-actions">
       <button type="button" class="btn btn-secondary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width=" 16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
         Cancel
       </button>
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary" [disabled]="addCongeForm.invalid">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
           <polyline points="17 21 17 13 7 13 7 21"></polyline>
