@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, Query, ParseEnumPipe, BadRequestException, UseGuards, Req } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param, Delete, ParseUUIDPipe, Query, ParseEnumPipe, BadRequestException, UseGuards, Req
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -60,7 +67,6 @@ export class UserController {
 
   @Delete('rh/:id')
   @Roles(UserRole.ADMIN)
-
   removeRh(@Param('id', ParseUUIDPipe) id: UUID) {
     return this.userService.removeRh(id);
   }
@@ -69,5 +75,11 @@ export class UserController {
   @Roles(UserRole.RH)
   removeEmployer(@Param('id', ParseUUIDPipe) id: UUID) {
     return this.userService.removeEmployer(id);
+  }
+
+  @Delete(':id')
+  @Roles(UserRole.RH, UserRole.ADMIN)
+  remove(@Param('id', ParseUUIDPipe) id: UUID) {
+    return this.userService.remove(id);
   }
 }

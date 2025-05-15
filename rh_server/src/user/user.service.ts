@@ -35,7 +35,7 @@ export class UserService {
   }
   async findAll(role: UserRole, p?: number, l?: number) {
     const { skip, take, page, limit } = getPaginationParams(p, l);
- 
+
     const [users, total] = await this.userRepo.findAndCount({
       where: {
         ...(role && { role })
@@ -97,6 +97,12 @@ export class UserService {
     const user = await this.findOne(id, UserRole.EMPLOYER);
     return await this.userRepo.remove(user);
   }
+
+  async remove(id: UUID): Promise<User> {
+    const user = await this.findOne(id);
+    return await this.userRepo.remove(user);
+  }
+
 
 
   async findOneByEmail(email: string): Promise<User | null> {
