@@ -8,6 +8,7 @@ import { PaginatedResponse } from '../../models/paginationresponse';
 import { LoadingComponent } from "../../common/loading/loading.component";
 import { EmptyComponent } from "../../common/empty/empty.component";
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-list-conge',
@@ -17,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ListCongeComponent {
   congesS: CongesService = inject(CongesService);
+  authS: AuthService = inject(AuthService);
   conges?: PaginatedResponse<Conge>;
   page: number = 1;
   nbPages: number[] = [];
