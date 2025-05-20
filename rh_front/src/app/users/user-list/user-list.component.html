@@ -53,7 +53,7 @@
       <tr>
         <td>
           <div class="user-info">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="user-avatar">
+            <img img [src]="user.photo ? user.photo : 'https://www.gravatar.com/avatar/?d=mp'" class="user-avatar">
             <div>
               <div class="user-name">{{user.firstName + ' ' + user.lastName}}</div>
               <div class="user-email">{{user.email}}</div>

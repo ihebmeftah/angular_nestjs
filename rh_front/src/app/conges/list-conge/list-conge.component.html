@@ -101,8 +101,10 @@
   <app-empty>
   </app-empty>
   }
+  @if(authS.currentUserRole() !=="admin"){
 
   <!-- Floating Action Button -->
   <button class="fab" routerLink="/conges/add">
     <span class="fab-icon">+</span>
   </button>
+  }

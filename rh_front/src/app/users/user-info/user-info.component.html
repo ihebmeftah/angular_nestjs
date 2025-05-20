@@ -9,7 +9,7 @@
   @if(user){
   <div class="user-profile-card">
     <div class="profile-header">
-      <img src="https://randomuser.me/api/portraits/women/44.jpg" class="user-avatar-lg">
+      <img img [src]="user.photo ? user.photo : 'https://www.gravatar.com/avatar/?d=mp'" class="user-avatar-lg">
       <div class="user-meta">
         <h2 class="user-name-lg">{{ user!.firstName + ' ' + user!.lastName }}</h2>
         <span class="user-role-badge role-admin">Administrator</span>
